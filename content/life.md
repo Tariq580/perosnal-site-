@@ -19,50 +19,35 @@ sections:
         author: Robert Kiyosaki
         status: finished
         desc: A different perspective on money and wealth. 
-  - name: places
-    items:
-      - name: Tokyo
-        year: 2024
-        desc: Quiet in unexpected ways. Vending machines on every corner. The trains run on time. A city that works.
-      - name: Lisbon
-        year: 2023
-        desc: Hills and light. The yellow trams. Tiles everywhere. Pastéis de nata for breakfast. A city that feels lived-in.
-      - name: Edinburgh
-        year: 2022
-        desc: Two cities stacked on each other — Old Town and New Town. Second-hand bookshops. Rain that comes sideways.
-      - name: Amsterdam
-        year: 2022
-        desc: Bikes as infrastructure. Narrow houses, steep stairs. A city designed for people, not cars. Stroopwafels.
+
   - name: books
     title: Favorite Books
     items:
-      - name: Siddhartha
-        author: Hermann Hesse
-        desc: A journey toward self-discovery. The river as teacher. "Knowledge can be communicated, but not wisdom."
-      - name: Meditations
-        author: Marcus Aurelius
-        desc: Private notes from a Roman emperor. Stoic philosophy as daily practice. Written for himself, relevant 2000 years later.
-      - name: The Elements of Style
-        author: Strunk & White
-        desc: Omit needless words. The classic guide to clear writing. 100 pages that improve everything you write.
-      - name: The War of Art
-        author: Steven Pressfield
-        desc: On resistance and the creative process. The enemy is not laziness but fear. Show up and do the work.
+      - name: atamic habits
+        author: james clear 
+        desc: one of the best non ficiton book out there. it teaches you wonderful things about habits and consistency.
+      - name: how to win friends and influence people
+        author: Dele carningie 
+        desc: my first read about communication, infuencing people and how to make friends and meaningful connectinos. 
+      - name: think and grow rich 
+        author: andrew carningie 
+        desc: one of my favorite book about money, desire, and mindset. 
+      - name: 48 laws of power 
+        author: Robert green 
+        desc: A powerful book that not only teaches you the laws of power that you can you in actual war, politics but also tips and tricks you can use in your workplace, school etc to gain power. 
   - name: films
     title: Favorite Films
     items:
-      - name: Lost in Translation
-        author: Sofia Coppola
-        desc: Two strangers in Tokyo. Jet lag and loneliness. Connection without resolution. The ending that says everything by saying nothing.
-      - name: Blade Runner
-        author: Ridley Scott
-        desc: What does it mean to be human? Rain-soaked neon future. "All those moments will be lost in time, like tears in rain."
-      - name: Spirited Away
-        author: Hayao Miyazaki
-        desc: A girl finds courage in a spirit world. Hand-drawn animation at its peak. Every frame a painting.
-      - name: Jiro Dreams of Sushi
-        author: David Gelb
-        desc: An 85-year-old sushi master still trying to improve. Dedication as philosophy. What it means to pursue perfection.
+      - name: Interseller 
+        author: Cristopher nolan 
+        desc: my favorite nolan movie. the cast, the background music by hanz zimmer, everything about this movie is awesome. 
+      - name: Inception
+        author: Cristopher nolan 
+        desc: A realy complex and hard to understand yet fantastic movie. Again the bg music ' time' is so good. The cast are all phenaminal. 
+      - name: The titanic 
+        author: idk 
+        desc: fav hollywood romance film. leo is amazing in this movie. 
+      
   - name: music
     title: Favorite Music
     items:
