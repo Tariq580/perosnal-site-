@@ -19,9 +19,17 @@ sections:
         desc: Started building a web app to track books read. Halfway through, realized a simple text file does everything I need. Sometimes the best code is no code.
   - name: failed
     items:
-      - name: Habit Tracker
+      - name: snapmeme 
         status: abandoned
-        desc: Scope crept from "simple checkboxes" to "full analytics dashboard." Motivation dropped. Classic second-system effect. Learned - start smaller, ship faster.
+        desc: (snapmeme.app) i vibe coded it using lovable in may 2025. However, it became flopped. 
+   
+      - name: amazon FBA 
+        status: abandoned 
+        desc: I lost $2k i had lended from my dad in this busnisss.
+  
+      - name: dropshipping 
+        status: abandoned 
+        desc: I lost $200  i had in my savings. it was my first busniess 
   - name: experiments
     items:
       - name: Minimal CSS Framework
