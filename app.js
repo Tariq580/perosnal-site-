@@ -24,8 +24,8 @@
   // Section mappings for drill-down navigation
   const SECTIONS = {
     'now': {
-      'working on': 'now-working',
-      'working': 'now-working',
+      'working on': 'now-working-on',
+      'working': 'now-working-on',
       'reading': 'now-reading',
       'thinking': 'now-thinking'
     },
@@ -50,7 +50,7 @@
 
   // Reverse mapping: sub-section -> parent
   const PARENT_MAP = {
-    'now-working': 'now',
+    'now-working-on': 'now',
     'now-reading': 'now',
     'now-thinking': 'now',
     'work-shipping': 'work',
