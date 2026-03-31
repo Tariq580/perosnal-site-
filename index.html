@@ -3,599 +3,282 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A minimal personal terminal — type commands to explore.">
-  <title>terminal</title>
+  <meta name="description" content="A monochrome personal archive of notes, essays, and project logs.">
+  <title>Arian Archive</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- Terminal Window -->
-  <div class="terminal">
-    <div class="terminal-header">
-      <span class="terminal-btn red"></span>
-      <span class="terminal-btn yellow"></span>
-      <span class="terminal-btn green"></span>
-      <span class="terminal-title">arian@site:~</span>
-    </div>
-    
-    <div class="terminal-body">
-      <div id="output" class="output-area"></div>
-      
-      <div class="input-line">
-        <span class="prompt-symbol">$</span>
-        <input type="text" id="cmd-input" autocomplete="off" autocapitalize="off" spellcheck="false" autofocus>
+  <div class="page-shell">
+    <header class="masthead">
+      <div class="masthead-copy">
+        <p class="eyebrow">personal archive</p>
+        <h1>Arian</h1>
+        <p class="tagline">Notes, projects, essays, and open loops.</p>
       </div>
+
+      <div class="masthead-meta">
+        <p class="meta-line">based in Japan</p>
+        <div class="contact-list"><a href="https://x.com/TechWithArian" target="_blank" rel="noreferrer">X</a><a href="https://github.com/Tariq580" target="_blank" rel="noreferrer">GitHub</a></div>
+        <button class="home-link" id="home-link" type="button">Overview</button>
+        <button class="archive-toggle" id="archive-toggle" type="button" aria-expanded="false" aria-controls="archive-panel">
+          Browse archive
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="archive-panel" id="archive-panel">
+        <div class="archive-panel-head">
+          <p class="section-label">index</p>
+          <h2>Everything</h2>
+        </div>
+
+        <div class="archive-tools">
+          <label class="search-label" for="search-input">Search</label>
+          <input id="search-input" type="search" placeholder="essay, project, note..." autocomplete="off">
+          <div class="filter-bar" id="filter-bar"><button class="filter-chip is-active" data-filter="all" type="button">
+      <span>all</span>
+      <span>16</span>
+    </button><button class="filter-chip" data-filter="essay" type="button">
+      <span>essays</span>
+      <span>3</span>
+    </button><button class="filter-chip" data-filter="note" type="button">
+      <span>notes</span>
+      <span>3</span>
+    </button><button class="filter-chip" data-filter="project" type="button">
+      <span>projects</span>
+      <span>9</span>
+    </button><button class="filter-chip" data-filter="update" type="button">
+      <span>updates</span>
+      <span>1</span>
+    </button></div>
+        </div>
+
+        <div class="archive-list" id="archive-list"><button class="archive-item" data-slug="now" type="button">
+      <span class="archive-meta">
+        <span>update</span>
+        <span>April 2026</span>
+      </span>
+      <strong>Now</strong>
+      <span class="archive-summary">What I am focused on right now, what I am reading, and what has my attention lately.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="productivity-vs-meaning" type="button">
+      <span class="archive-meta">
+        <span>note</span>
+        <span>March 28, 2026</span>
+      </span>
+      <strong>Productivity vs. Meaning</strong>
+      <span class="archive-summary">A short note on doing more versus doing what actually matters.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="how-tools-shape-thought" type="button">
+      <span class="archive-meta">
+        <span>note</span>
+        <span>March 21, 2026</span>
+      </span>
+      <strong>How Tools Shape Thought</strong>
+      <span class="archive-summary">Fast tools, slow tools, and the kinds of thinking each one encourages.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="what-enough-means" type="button">
+      <span class="archive-meta">
+        <span>note</span>
+        <span>March 12, 2026</span>
+      </span>
+      <strong>What &quot;Enough&quot; Means</strong>
+      <span class="archive-summary">If you never define enough, ambition can quietly become a trap.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="personal-site" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Live</span>
+      </span>
+      <strong>Personal Site</strong>
+      <span class="archive-summary">The site you are reading now. A personal archive for essays, notes, and project logs.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="live">live</span></span>
+    </button><button class="archive-item" data-slug="local-first-sync-system" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Exploring</span>
+      </span>
+      <strong>Local-first Sync System</strong>
+      <span class="archive-summary">An idea for syncing plain text files across devices without needing a traditional cloud account.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="exploring">exploring</span></span>
+    </button><button class="archive-item" data-slug="reading-tracker" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Paused</span>
+      </span>
+      <strong>Reading Tracker</strong>
+      <span class="archive-summary">A web app idea that reminded me a simple text file often does the job better.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="paused">paused</span></span>
+    </button><button class="archive-item" data-slug="minimal-email-client" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Sketching</span>
+      </span>
+      <strong>Minimal Email Client</strong>
+      <span class="archive-summary">A keyboard-first, text-heavy email client for people who want email to feel boring again.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="sketching">sketching</span></span>
+    </button><button class="archive-item" data-slug="worth-it" type="button">
+      <span class="archive-meta">
+        <span>essay</span>
+        <span>January 30, 2026</span>
+      </span>
+      <strong>I Spent My Teens Chasing Dreams That All Failed. Was It Worth It?</strong>
+      <span class="archive-summary">On trying dropshipping, Amazon FBA, content creation, and programming before adulthood, and what those failures taught me.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="is-this-really-education" type="button">
+      <span class="archive-meta">
+        <span>essay</span>
+        <span>January 8, 2026</span>
+      </span>
+      <strong>Is This Really Education?</strong>
+      <span class="archive-summary">A short piece about school, attention, outdated systems, and why AI literacy should matter.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="on-friction-in-tools" type="button">
+      <span class="archive-meta">
+        <span>essay</span>
+        <span>January 6, 2026</span>
+      </span>
+      <strong>On Friction in Tools</strong>
+      <span class="archive-summary">A short essay on why speed is not always the same as clarity.</span>
+      <span class="archive-pills"></span>
+    </button><button class="archive-item" data-slug="plain-text-notes" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Shipped</span>
+      </span>
+      <strong>Plain Text Notes</strong>
+      <span class="archive-summary">A note-taking approach built around plain text files, simple editors, and long-term portability.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="shipped">shipped</span></span>
+    </button><button class="archive-item" data-slug="bookmark-exporter" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Shipped</span>
+      </span>
+      <strong>Bookmark Exporter</strong>
+      <span class="archive-summary">A tiny tool for exporting browser bookmarks into plain text with less clutter and no account setup.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="shipped">shipped</span></span>
+    </button><button class="archive-item" data-slug="snapmeme" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Failed</span>
+      </span>
+      <strong>Snapmeme</strong>
+      <span class="archive-summary">A meme site built quickly, posted publicly, and mostly ignored. A useful lesson in attention, distribution, and patience.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="failed">failed</span></span>
+    </button><button class="archive-item" data-slug="amazon-fba" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Failed</span>
+      </span>
+      <strong>Amazon FBA</strong>
+      <span class="archive-summary">A first serious business attempt that cost money, confidence, and a few assumptions about how easy ecommerce would be.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="failed">failed</span></span>
+    </button><button class="archive-item" data-slug="dropshipping" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Failed</span>
+      </span>
+      <strong>Dropshipping</strong>
+      <span class="archive-summary">My first online business attempt, powered by internet promises and stopped by reality.</span>
+      <span class="archive-pills"><span class="entry-pill" data-tone="failed">failed</span></span>
+    </button></div>
+      </aside>
+
+      <section class="reader-panel">
+        <div class="reader-view" id="reader-view"><section class="overview">
+    <div class="overview-hero">
+      <p class="eyebrow">reading room</p>
+      <h2>Arian</h2>
+      <p class="lead">Notes, projects, essays, and open loops.</p>
+      <div class="overview-copy"><p>I wanted this site to feel less like a gimmick and more like a personal archive: a place where essays, quick thoughts, project logs, and unfinished questions can live side by side.</p>
+<p>Everything here is written in Markdown, published as static files, and organized so people can move through it like a reading room instead of a maze of pages.</p>
+</div>
     </div>
-  </div>
 
-  <!-- Hidden Content Templates -->
-  <div id="templates" style="display:none;">
+    <div class="overview-grid">
+      <section class="overview-card">
+        <p class="section-label">current focus</p>
+        <ul class="stack-list">
+          <li>Redesigning this site into a calmer reading experience.</li><li>Learning programming seriously while still shipping small things.</li><li>Writing more often, even when the thought is still unfinished.</li>
+        </ul>
+      </section>
 
-    <!-- BOOT SEQUENCE -->
-    <template id="tpl-boot">
-<pre id="ascii-typing" class="ascii-banner"></pre>
-<p class="intro-msg"></p>
-<p class="welcome-msg"></p>
-    </template>
+      <section class="overview-card">
+        <p class="section-label">reading now</p>
+        <ul class="stack-list">
+          <li>48 Laws of Power</li><li>How to Stop Overthinking</li>
+        </ul>
+      </section>
 
-    <!-- HELP -->
-    <template id="tpl-help">
-<p class="cmd-echo">$ help</p>
-<pre class="help-text">
-Available commands:
-
-  now        what I'm currently up to
-  writing    notes and essays
-  work       projects, experiments, ideas
-  life       reading, places, favorites
-  links      socials and bookmarks
-  about      about me and this site
-  
-  clear      clear the terminal
-  help       show this message
-</pre>
-    </template>
-
-    <!-- NOW -->
-    <template id="tpl-now">
-<p class="cmd-echo">$ cat ~/now.txt</p>
-<h2># Now</h2>
-<p class="meta">Last updated: January 2026</p>
-
-<div class="kv-list">
-  <div class="kv-row"><span class="kv-key">working on</span><span class="kv-val">this site, writing more, personal projects</span></div>
-  <div class="kv-row"><span class="kv-key">reading</span><span class="kv-val">48 laws of power (in progress), how to stop overthinking (in progress)</span></div>
-  <div class="kv-row"><span class="kv-key">thinking</span><span class="kv-val">productivity vs meaning, how tools shape thought, what "enough" means</span></div>
-</div>
-<p class="nav-hint">type a section name to expand · or another command</p>
-    </template>
-
-
-    <!-- NOW - WORKING ON -->
-    <template id="tpl-now-working-on">
-<p class="cmd-echo">$ cat ~/now/working-on.txt</p>
-<h2># Working on</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ this site</span>
-    <p class="detail-desc">Building an interactive terminal-style personal site. Plain HTML, CSS, and minimal JavaScript. No frameworks, no build tools.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ writing more</span>
-    <p class="detail-desc">Short notes, longer essays, whatever comes. Trying to publish regularly and think in public.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ personal projects</span>
-    <p class="detail-desc">Taking a break from client work to focus on what interests me. Building tools I want to use.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to now · or another command</p>
-    </template>
-
-    <!-- NOW - READING -->
-    <template id="tpl-now-reading">
-<p class="cmd-echo">$ cat ~/now/reading.txt</p>
-<h2># Reading</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ 48 laws of power</span>
-    <span class="detail-status">[in progress]</span>
-    <p class="detail-desc">robert green introduces the secrets to achieve power no matter what you do in your life.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ how to stop overthinking</span>
-    <span class="detail-status">[in progress]</span>
-    <p class="detail-desc">The author talks about overthinking , the roots and origin of overthinking and how to free yourself from it.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to now · or another command</p>
-    </template>
-
-    <!-- NOW - THINKING -->
-    <template id="tpl-now-thinking">
-<p class="cmd-echo">$ cat ~/now/thinking.txt</p>
-<h2># Thinking</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ productivity vs meaning</span>
-    <p class="detail-desc">Is getting more done the goal? Or is it about doing the right things? The hustle culture vs. slow living debate.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ how tools shape thought</span>
-    <p class="detail-desc">The medium is the message. A notes app that's fast encourages different thinking than one that's slow. What do my tools optimize for?</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ what "enough" means</span>
-    <p class="detail-desc">When do you have enough money, enough stuff, enough success? Most people never define this, so they never reach it.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to now · or another command</p>
-    </template>
-
-    <!-- WRITING -->
-    <template id="tpl-writing">
-<p class="cmd-echo">$ ls ~/writing/</p>
-<h2># Writing</h2>
-<p class="meta">Type <span class="cmd-hint">read &lt;n&gt;</span> to open an article.</p>
-
-<div class="article-list">
-
-  <div class="article-row"><span class="article-num">[1]</span><span class="article-title">i spent my teens chasing dreams that all failed. Was it worth it?</span><span class="article-date">Fri, Jan 30, 2026</span></div>
-  <div class="article-row"><span class="article-num">[2]</span><span class="article-title">Is This Really Education?</span><span class="article-date">Thu, Jan 08, 2026</span></div>
-  <div class="article-row"><span class="article-num">[3]</span><span class="article-title">On friction in tools</span><span class="article-date">Tue, Jan 06, 2026</span></div>
-</div>
-<p class="nav-hint">↑↓ history · tab autocomplete · type another command or 'help'</p>
-    </template>
-
-
-    <!-- ARTICLE 1 -->
-    <template id="tpl-article-1">
-<p class="cmd-echo">$ cat ~/writing/2026-01-30-failures.txt</p>
-<article class="full-article">
-  <h2>i spent my teens chasing dreams that all failed. Was it worth it?</h2>
-  <p class="article-meta">January 30, 2026</p>
-  
-  <div class="article-body">
-    <p>Everyone says i wasted my high school years.
-i was too serious. i didn&#39;t enjoy. i started early. 
-Maybe they&#39;re right. Maybe they&#39;re wrong.
-Read my story, then tell me what you think:</p>
-<p>it was October 2023, i was in my first year of high school here in Japan. 
-i hated school and every subject, even the ones I liked during my junior and elementary school, like math and history, probably because of the language barrier I had at the time, since it was just a year since I&#39;d come to Japan. </p>
-<p>i was scrolling social media like every other teenager my age, but something was wrong. But what? 
-My Instagram and TikTok feeds were all full of videos of millionaires like Iman Gadzi, Davie Fogarty etc talking about how easy it is to get rich by using their frameworks and methods, and a bunch of other people rating online businesses on a daily basis. 
-they would make it sound so easy that every minute I&#39;d spend on my phone was like &quot;wtf am I doing with my life&quot;  but I was only 16.</p>
-<p>it seemed so easy: </p>
-<p>open shopify -&gt; create an account and get ur ready to publish site in minutes 
-open Ali express -&gt; connect it with your shopify store and that&#39;s it!
-you&#39;re officially an online business owner. </p>
-<p>finaly I decided to get into this world and get rich like everyone else before turning 20. 
-first, what i did was buy an online course worth 200$ to learn about these online things like dropshipping, affiliate marketing, content creation... 
-second i had $200 left of my savings which i spent on Shopify subscription, domain, tiktok and facebook ads. </p>
-<p>i would get stuck daily trying to make ads, but there was no result at all. 
-after spending about 4 to 5 months in this dream of becoming the first millionaire in my family, i canceled my Shopify subscription, domain etc 
-i sat down and was like:<br>&quot;Maybe dropshipping is not meant for me&quot; 
-&quot;Maybe I am too late&quot;<br>so I gave up.
-but that guy who sold me his course? still selling it. probably rich by now. </p>
-<p>Then it was the summer of 2024.
-High schools were off, and I was thinking about starting sth else, and this time i came across Amazon FBA, but after research, I found that it requires serious capital to start.</p>
-<p>After thinking a lot i asked my dad for $2k to start selling stuff under my own brand name 
-He agreed. i found a supplier on Alibaba and decided to sell water bottles as my first product. chose usa as my primary market.</p>
-<p>the products reached Amazon warehouses in usa and congrats to me, I was officially a brand owner at 17. </p>
-<p>i was so happy that my family would make fun of me at home.<br>Then there was no sale for weeks again. i waited week after week for my first sale until one day that wish was fulfilled.</p>
-<p>however that was my first and last sale because after that i was just looking at a blank dashboard for months. </p>
-<p>idk why that failed: 
-private label?     wrong product?     wrong market?   starting too big? 
-but anyway, i then paid amazon to throw away them bottles so i could get rid of their costs, and this was the end of being a brand owner. 
-still in debt to my dad :) </p>
-<p>then it was January 2025.</p>
-<p>new year, new attempt.
-this time, decided to go into the content creation world.
-chose X and created my account.</p>
-<p>thinking that I&#39;d be writing about my interests such as programming, AI, and gain followers but after discovering communities such as build in public and finding accounts like @marclou, @jackfriks talking about a new term called &quot; vibe coding &quot; and how people can make money with it by creating quick mvps and production-ready apps, i decided to give it a try.
-started with lovable. created a meme website called snapmeme and posted about it on my X accounts and communities.</p>
-<p>but every post would have about 10 to 30 views. 
-so as no one knew about this snapmeme, so-called my startup i didnt have any other way but to give up on this too </p>
-<p>i didnt give up on writing tweets though, despite knowing that nobody would really see them. I had about 200 followers at that time. now i have 250 😇.</p>
-<p>but as i was just writing tweets and not building anything, it didn&#39;t feel alright- i decided to learn programming from scratch. </p>
-<p>i bought a 53h python course on Udemy. watched it for a few weeks but seeing people claiming that they made.....money with their vibe coded app built in a weekend, I quit that course too and decided to go back to vibe coding and this time build an app. </p>
-<p>still building it. </p>
-<p>i still do not know if what I&#39;m doing is right or wrong or if this time I&#39;m gonna succeed or not but I will keep going because of this quote:
-( if you&#39;re tired of starting over, stop giving up.) </p>
-<p>now reflecting on this journey full of failures and give-ups, i sometimes think;
-What if i had started another dropshipping store and not given up? 
-What if i had chosen another product and sold it on amazon instead of quitting it all 
-What if i had not quit that python course and finished it till the end? 
-and .......</p>
-<p>but because of these experiences: 
-just because someone in some part of the world got rich doing X doesn&#39;t mean you can&#39;t, and just because they succeeded doesn&#39;t mean you will.</p>
-<p>i now know that figuring out is an important skill, no matter what you do, because most of the time, the reason I&#39;d quit was getting stuck at sth and not trying to figure it out.</p>
-<p>I&#39;m able to use/work with tools and apps like creating a store on Shopify, using WordPress, Lovable, Cursor, Codex, Claude, Canva, Gumroad, claude, chatgpt, gemini, git and github, VS Code, Xcode...  that otherwise wouldn&#39;t have known or used them at all if it wasn&#39;t for these experiments.
- i now know that not everything is as easy and plain as it looks on social media and in the &quot; best businesses to start in ...... year &quot; videos.</p>
-<p>So was it worth it? 
-well i don&#39;t really know, but i do think i did well by experiencing different things and skills, as they helped me:
- develop a sense of curiosity
- the courage to start something new
-and that failures aren&#39;t always bad; sometimes they just open your eyes to a new world. </p>
-
-  </div>
-</article>
-<p class="nav-hint">type 'writing' to go back · or enter another command</p>
-    </template>
-
-    <!-- ARTICLE 2 -->
-    <template id="tpl-article-2">
-<p class="cmd-echo">$ cat ~/writing/2026-01-08-education.txt</p>
-<article class="full-article">
-  <h2>Is This Really Education?</h2>
-  <p class="article-meta">January 8, 2026</p>
-  
-  <div class="article-body">
-    <p>Right now, I am sitting here in a physics class. The teacher has been talking for over 40 minutes, but none of the students, including me, seem to care about what he is saying.</p>
-<p>None of us wants to be in this class, and we&#39;re clearly not interested. Yet somehow, we&#39;ve been placed here, either by our parents or by society.</p>
-<p>And I don&#39;t think this is just happening here in Japan, I believe it&#39;s happening in many countries around the world. The education system is broken and outdated.</p>
-<p>The other day, I saw a student at our school who didn&#39;t even know how to use ChatGPT. Why? Because we&#39;re not being taught about tools like that.</p>
-<p>Sometimes I wonder: What if schools taught things like coding, content creation, AI, and communication skills?</p>
-<p>So the real question is: For how long will education continue like this?</p>
-
-  </div>
-</article>
-<p class="nav-hint">type 'writing' to go back · or enter another command</p>
-    </template>
-
-    <!-- ARTICLE 3 -->
-    <template id="tpl-article-3">
-<p class="cmd-echo">$ cat ~/writing/2026-01-06-friction.txt</p>
-<article class="full-article">
-  <h2>On friction in tools</h2>
-  <p class="article-meta">January 6, 2026</p>
-  
-  <div class="article-body">
-    <p>Friction isn&#39;t always bad. Some friction creates space for thought.</p>
-<p>When everything is instant, we lose the pause. The moment to reconsider. The chance to change our minds before committing.</p>
-<p>The best tools know when to slow you down.</p>
-
-  </div>
-</article>
-<p class="nav-hint">type 'writing' to go back · or enter another command</p>
-    </template>
-
-    <!-- WORK -->
-    <template id="tpl-work">
-<p class="cmd-echo">$ cat ~/work.txt</p>
-<h2># Work</h2>
-
-<div class="kv-list">
-  <div class="kv-row"><span class="kv-key">shipping</span><span class="kv-val">Personal Site (live), Plain Text Notes (shipped), Bookmark Exporter (shipped)</span></div>
-  <div class="kv-row"><span class="kv-key">paused</span><span class="kv-val">Reading Tracker (paused)</span></div>
-  <div class="kv-row"><span class="kv-key">failed</span><span class="kv-val">snapmeme (abandoned), amazon FBA (abandoned), dropshipping (abandoned)</span></div>
-  <div class="kv-row"><span class="kv-key">experiments</span><span class="kv-val">Minimal CSS Framework, Static Site Search, CSS-Only Dark Mode</span></div>
-  <div class="kv-row"><span class="kv-key">ideas</span><span class="kv-val">Local-first sync system (exploring), Minimal email client (sketching), Distraction-free writing tool (someday)</span></div>
-</div>
-<p class="nav-hint">type a section name to expand · or another command</p>
-    </template>
-
-
-    <!-- WORK - SHIPPING -->
-    <template id="tpl-work-shipping">
-<p class="cmd-echo">$ cat ~/work/shipping.txt</p>
-<h2># Shipping</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ Personal Site</span>
-    <span class="detail-status">[live]</span>
-    <p class="detail-desc">This website. An interactive terminal built with plain HTML, CSS, and minimal JavaScript. No frameworks, no dependencies.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Plain Text Notes</span>
-    <span class="detail-status">[shipped]</span>
-    <p class="detail-desc">A note-taking system using plain .txt files. Synced via iCloud/Dropbox. Works with any text editor. Simple and future-proof.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Bookmark Exporter</span>
-    <span class="detail-status">[shipped]</span>
-    <p class="detail-desc">A bookmarklet that exports browser bookmarks to plain text. One click, clean output, no accounts needed.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to work · or another command</p>
-    </template>
-
-    <!-- WORK - PAUSED -->
-    <template id="tpl-work-paused">
-<p class="cmd-echo">$ cat ~/work/paused.txt</p>
-<h2># Paused</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ Reading Tracker</span>
-    <span class="detail-status">[paused]</span>
-    <p class="detail-desc">Started building a web app to track books read. Halfway through, realized a simple text file does everything I need. Sometimes the best code is no code.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to work · or another command</p>
-    </template>
-
-    <!-- WORK - FAILED -->
-    <template id="tpl-work-failed">
-<p class="cmd-echo">$ cat ~/work/failed.txt</p>
-<h2># Failed</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ snapmeme</span>
-    <span class="detail-status">[abandoned]</span>
-    <p class="detail-desc">(snapmeme.app) i vibe coded it using lovable in may 2025. However, it became flopped.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ amazon FBA</span>
-    <span class="detail-status">[abandoned]</span>
-    <p class="detail-desc">I lost $2k i had lended from my dad in this busnisss.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ dropshipping</span>
-    <span class="detail-status">[abandoned]</span>
-    <p class="detail-desc">I lost $200  i had in my savings. it was my first busniess</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to work · or another command</p>
-    </template>
-
-    <!-- WORK - EXPERIMENTS -->
-    <template id="tpl-work-experiments">
-<p class="cmd-echo">$ cat ~/work/experiments.txt</p>
-<h2># Experiments</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ Minimal CSS Framework</span>
-    <p class="detail-desc">CSS framework with no classes. Just semantic HTML that looks good by default. Exploring how far you can get without utility classes.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Static Site Search</span>
-    <p class="detail-desc">Client-side search for static websites. No server needed. Pre-builds an index at compile time, searches in the browser.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ CSS-Only Dark Mode</span>
-    <p class="detail-desc">Dark mode toggle using only CSS and the :checked pseudo-class. No JavaScript. Persists via localStorage with a tiny inline script.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to work · or another command</p>
-    </template>
-
-    <!-- WORK - IDEAS -->
-    <template id="tpl-work-ideas">
-<p class="cmd-echo">$ cat ~/work/ideas.txt</p>
-<h2># Ideas</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ Local-first sync system</span>
-    <span class="detail-status">[exploring]</span>
-    <p class="detail-desc">Sync plain text files across devices without a cloud service. Peer-to-peer, encrypted, no accounts. Like Syncthing but simpler.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Minimal email client</span>
-    <span class="detail-status">[sketching]</span>
-    <p class="detail-desc">Text-based interface to Gmail/Fastmail APIs. Keyboard-driven. No HTML emails, just plain text. For people who want email to be boring again.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Distraction-free writing tool</span>
-    <span class="detail-status">[someday]</span>
-    <p class="detail-desc">Just text. No formatting buttons, no word count, no AI suggestions. A blank page that saves automatically.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to work · or another command</p>
-    </template>
-
-    <!-- LIFE -->
-    <template id="tpl-life">
-<p class="cmd-echo">$ cat ~/life.txt</p>
-<h2># Life</h2>
-
-<div class="kv-list">
-  <div class="kv-row"><span class="kv-key">reading</span><span class="kv-val">To kill a mockingbird (finished), Atomic habits (finished), 48 laws of power (Reading), Rich dad and poor dad (finished)</span></div>
-  <div class="kv-row"><span class="kv-key">books</span><span class="kv-val">atamic habits, how to win friends and influence people, think and grow rich, 48 laws of power</span></div>
-  <div class="kv-row"><span class="kv-key">films</span><span class="kv-val">Interseller, Inception, The titanic</span></div>
-  <div class="kv-row"><span class="kv-key">music</span><span class="kv-val">Kind of Blue, In Rainbows, Ambient 1: Music for Airports</span></div>
-</div>
-<p class="nav-hint">type a section name to expand · or another command</p>
-    </template>
-
-
-    <!-- LIFE - READING -->
-    <template id="tpl-life-reading">
-<p class="cmd-echo">$ cat ~/life/reading.txt</p>
-<h2># Reading</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ To kill a mockingbird</span>
-    <span class="detail-status">Harper Lee</span>
-    <p class="detail-desc">my first fiction book and it was fantastic. I didnt know fiction books would be that interesting and gripping but, wow it was good. I learned about so many things from this book such as recism, social morals and standard of 1900s. I found out about the history of 'nigga' or 'nigger' and i was stunned about people's behevior with these colored poeple. As I've been aware of the racial issues going on in Usa throughout these years, I did not know it was that serious back then. Everyone had this idea that crime = black person. White people were inoccent no matter what they did and black were guilty for no reason. There were people, hating on Adolf hittler for mistreating and punshing the jews, while they were doing the same with black poeple in their town.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Atomic habits</span>
-    <span class="detail-status">James Clear</span>
-    <p class="detail-desc">One of the best nonfiction book I've read in my life. It changed my view about habits and consistency. It taught me about the importance of little actions taken daily with no excuse and their impact on our lifes over a long period of time. I learned how to start a new habit and end the bad ones by using various techniques and methods such as habit stacking, understanding the cue of your habits and eliminating it from your environment. As a summary, it says design your environment in a way you can accomplish your habits unconsciously without any effort. For example, you need to go for a run every morning, therefore in order to do this action unconsciously you can do things like putting your running shoes in your room where you can see it or if you want to read a book every evening, you can put your book in your bed during the day so whenever you enter your room at the evening you can see it right away and then it's very unlikely that you will neglect and do not do that action.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ 48 laws of power</span>
-    <span class="detail-status">Robert Green</span>
-    <p class="detail-desc">so far it's fantastic.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Rich dad and poor dad</span>
-    <span class="detail-status">Robert Kiyosaki</span>
-    <p class="detail-desc">A different perspective on money and wealth.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to life · or another command</p>
-    </template>
-
-    <!-- LIFE - BOOKS -->
-    <template id="tpl-life-books">
-<p class="cmd-echo">$ cat ~/life/books.txt</p>
-<h2># Favorite Books</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ atamic habits</span>
-    <span class="detail-status">james clear</span>
-    <p class="detail-desc">one of the best non ficiton book out there. it teaches you wonderful things about habits and consistency.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ how to win friends and influence people</span>
-    <span class="detail-status">Dele carningie</span>
-    <p class="detail-desc">my first read about communication, infuencing people and how to make friends and meaningful connectinos.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ think and grow rich</span>
-    <span class="detail-status">andrew carningie</span>
-    <p class="detail-desc">one of my favorite book about money, desire, and mindset.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ 48 laws of power</span>
-    <span class="detail-status">Robert green</span>
-    <p class="detail-desc">A powerful book that not only teaches you the laws of power that you can you in actual war, politics but also tips and tricks you can use in your workplace, school etc to gain power.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to life · or another command</p>
-    </template>
-
-    <!-- LIFE - FILMS -->
-    <template id="tpl-life-films">
-<p class="cmd-echo">$ cat ~/life/films.txt</p>
-<h2># Favorite Films</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ Interseller</span>
-    <span class="detail-status">Cristopher nolan</span>
-    <p class="detail-desc">my favorite nolan movie. the cast, the background music by hanz zimmer, everything about this movie is awesome.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Inception</span>
-    <span class="detail-status">Cristopher nolan</span>
-    <p class="detail-desc">A realy complex and hard to understand yet fantastic movie. Again the bg music ' time' is so good. The cast are all phenaminal.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ The titanic</span>
-    <span class="detail-status">idk</span>
-    <p class="detail-desc">fav hollywood romance film. leo is amazing in this movie.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to life · or another command</p>
-    </template>
-
-    <!-- LIFE - MUSIC -->
-    <template id="tpl-life-music">
-<p class="cmd-echo">$ cat ~/life/music.txt</p>
-<h2># Favorite Music</h2>
-
-<div class="detail-list">
-  <div class="detail-item">
-    <span class="detail-name">→ Kind of Blue</span>
-    <span class="detail-status">Miles Davis</span>
-    <p class="detail-desc">Modal jazz. Recorded in two sessions. The best-selling jazz album of all time. Music that sounds like late night.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ In Rainbows</span>
-    <span class="detail-status">Radiohead</span>
-    <p class="detail-desc">Released as pay-what-you-want. Warm and human after years of cold electronics. "Reckoner" as a perfect song.</p>
-  </div>
-  <div class="detail-item">
-    <span class="detail-name">→ Ambient 1: Music for Airports</span>
-    <span class="detail-status">Brian Eno</span>
-    <p class="detail-desc">Music designed to be ignored. Background listening as an art form. Created to calm nervous flyers.</p>
-  </div>
-</div>
-<p class="nav-hint">type 'back' to return to life · or another command</p>
-    </template>
-
-    <!-- LINKS -->
-    <template id="tpl-links">
-<p class="cmd-echo">$ cat ~/bookmarks.txt</p>
-<h2># Links</h2>
-
-<h3>## Socials</h3>
-<ul>
-  <li><a href="https://x.com/TechWithArian" target="_blank">X (Twitter)</a></li>
-  <li><a href="https://github.com/Tariq580" target="_blank">GitHub</a></li>
-</ul>
-
-<h3>## X posts</h3>
-<ul>
-  <li><a href="https://gwern.net" target="_blank">Gwern.net</a> — long-form essays on everything</li>
-  <li><a href="https://patrickcollison.com" target="_blank">Patrick Collison</a> — simple, text-focused</li>
-  <li><a href="https://sive.rs" target="_blank">Derek Sivers</a> — clear thinking, short essays</li>
-</ul>
-
-<h3>## Books</h3>
-<ul>
-  <li><span class="name">48 Laws of Power</span> — I'm reading it now and so many great secrets are in this book</li>
-  <li><span class="name">To Kill a Mockingbird</span> — my first fiction book and its becoming my favorite</li>
-  <li><span class="name">Atomic Habits</span> — first book I read about habits and it stunned me</li>
-</ul>
-<p class="nav-hint">↑↓ history · tab autocomplete · type another command or 'help'</p>
-    </template>
-
-    <!-- ABOUT -->
-    <template id="tpl-about">
-<p class="cmd-echo">$ cat ~/about.txt</p>
-<h2># About</h2>
-
-<div class="about-intro">
-  <p>I write about design, tools, and process. Interested in how the things we build shape the way we think.</p>
-  <p>This site is where I work through ideas in public. Some posts are finished. Some are drafts. All are subject to revision.</p>
-</div>
-
-<h3>## This Site</h3>
-<div class="kv-list">
-  <div class="kv-row"><span class="kv-key">stack</span><span class="kv-val">HTML, CSS, minimal JavaScript</span></div>
-  <div class="kv-row"><span class="kv-key">fonts</span><span class="kv-val">SF Mono, Fira Code, system monospace</span></div>
-  <div class="kv-row"><span class="kv-key">colors</span><span class="kv-val">green (#00ff66) on black (#0a0a0a)</span></div>
-  <div class="kv-row"><span class="kv-key">interface</span><span class="kv-val">interactive terminal</span></div>
-  <div class="kv-row"><span class="kv-key">source</span><span class="kv-val">view-source friendly, no build tools</span></div>
-</div>
-
-<h3>## Contact</h3>
-<div class="kv-list">
-  <div class="kv-row"><span class="kv-key">email</span><span class="kv-val"><a href="mailto:hello@example.com">hello@example.com</a></span></div>
-  <div class="kv-row"><span class="kv-key">twitter</span><span class="kv-val"><a href="https://x.com/TechWithArian" target="_blank">@TechWithArian</a></span></div>
-  <div class="kv-row"><span class="kv-key">github</span><span class="kv-val"><a href="https://github.com/Tariq580" target="_blank">Tariq580</a></span></div>
-</div>
-<p class="nav-hint">↑↓ history · tab autocomplete · type another command or 'help'</p>
-    </template>
-
-    <!-- EASTER EGGS -->
-    <template id="tpl-sudo">
-<p class="cmd-echo">$ sudo</p>
-<p class="error">Permission denied. Nice try though. 😏</p>
-    </template>
-
-    <template id="tpl-unknown">
-<p class="cmd-echo">$ {cmd}</p>
-<p class="error">Command not found: {cmd}</p>
-<p class="hint">Type 'help' for available commands.</p>
-    </template>
-
-    <template id="tpl-clear">
-    </template>
-
-  </div>
-
-  <!-- No-JS Fallback -->
-  <noscript>
-    <div class="noscript-fallback">
-      <h1>Terminal requires JavaScript</h1>
-      <p>Please enable JavaScript to use this interactive terminal, or view the <a href="https://github.com/Tariq580">source on GitHub</a>.</p>
+      <section class="overview-card">
+        <p class="section-label">shelf</p>
+        <div class="shelf-grid">
+          <div>
+            <span>books</span>
+            <ul><li>Atomic Habits</li><li>To Kill a Mockingbird</li><li>How to Win Friends and Influence People</li><li>Think and Grow Rich</li></ul>
+          </div>
+          <div>
+            <span>films</span>
+            <ul><li>Interstellar</li><li>Inception</li><li>Titanic</li></ul>
+          </div>
+          <div>
+            <span>music</span>
+            <ul><li>Kind of Blue</li><li>In Rainbows</li><li>Ambient 1: Music for Airports</li></ul>
+          </div>
+        </div>
+      </section>
     </div>
-  </noscript>
 
+    <section class="featured-section">
+      <div class="section-heading">
+        <p class="section-label">selected entries</p>
+        <p class="section-note">16 entries in the archive</p>
+      </div>
+      <div class="featured-grid">
+        <button class="featured-card" data-slug="now" type="button">
+      <span class="archive-meta">
+        <span>update</span>
+        <span>April 2026</span>
+      </span>
+      <h3>Now</h3>
+      <p>What I am focused on right now, what I am reading, and what has my attention lately.</p>
+      
+    </button><button class="featured-card" data-slug="productivity-vs-meaning" type="button">
+      <span class="archive-meta">
+        <span>note</span>
+        <span>March 28, 2026</span>
+      </span>
+      <h3>Productivity vs. Meaning</h3>
+      <p>A short note on doing more versus doing what actually matters.</p>
+      
+    </button><button class="featured-card" data-slug="personal-site" type="button">
+      <span class="archive-meta">
+        <span>project</span>
+        <span>Live</span>
+      </span>
+      <h3>Personal Site</h3>
+      <p>The site you are reading now. A personal archive for essays, notes, and project logs.</p>
+      <span class="entry-pill" data-tone="live">live</span>
+    </button><button class="featured-card" data-slug="worth-it" type="button">
+      <span class="archive-meta">
+        <span>essay</span>
+        <span>January 30, 2026</span>
+      </span>
+      <h3>I Spent My Teens Chasing Dreams That All Failed. Was It Worth It?</h3>
+      <p>On trying dropshipping, Amazon FBA, content creation, and programming before adulthood, and what those failures taught me.</p>
+      
+    </button>
+      </div>
+    </section>
+  </section></div>
+      </section>
+    </main>
+  </div>
+
+  <button class="archive-scrim" id="archive-scrim" type="button" aria-label="Close archive"></button>
+
+  <script id="site-data" type="application/json">{"profile":{"name":"Arian","siteTitle":"Arian Archive","tagline":"Notes, projects, essays, and open loops.","location":"Japan","intro":["I'm interested in tools, ambition, internet culture, and the process of learning in public.","This archive is where I keep longer essays, shorter notes, project logs, and the experiments that taught me something."],"contact":[{"label":"X","value":"@TechWithArian","url":"https://x.com/TechWithArian"},{"label":"GitHub","value":"Tariq580","url":"https://github.com/Tariq580"}],"currentFocus":["Redesigning this site into a calmer reading experience.","Learning programming seriously while still shipping small things.","Writing more often, even when the thought is still unfinished."],"readingNow":["48 Laws of Power","How to Stop Overthinking"],"shelf":{"books":["Atomic Habits","To Kill a Mockingbird","How to Win Friends and Influence People","Think and Grow Rich"],"films":["Interstellar","Inception","Titanic"],"music":["Kind of Blue","In Rainbows","Ambient 1: Music for Airports"]},"bodyHtml":"\u003cp\u003eI wanted this site to feel less like a gimmick and more like a personal archive: a place where essays, quick thoughts, project logs, and unfinished questions can live side by side.\u003c/p\u003e\n\u003cp\u003eEverything here is written in Markdown, published as static files, and organized so people can move through it like a reading room instead of a maze of pages.\u003c/p\u003e\n"},"counts":{"update":1,"note":3,"project":9,"essay":3},"entries":[{"slug":"now","title":"Now","type":"update","status":"","sortDate":"2026-04-01T00:00:00.000Z","dateLabel":"April 2026","summary":"What I am focused on right now, what I am reading, and what has my attention lately.","tags":["now","update"],"featured":true,"html":"\u003ch2\u003eWorking on\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eRedesigning this personal site into something calmer, clearer, and easier to read.\u003c/li\u003e\n\u003cli\u003eLearning programming more seriously while still building small things in public.\u003c/li\u003e\n\u003cli\u003eWriting more often, even if the idea is still rough.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eReading\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cem\u003e48 Laws of Power\u003c/em\u003e by Robert Greene\u003c/li\u003e\n\u003cli\u003e\u003cem\u003eHow to Stop Overthinking\u003c/em\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2\u003eThinking about\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eThe difference between being productive and doing meaningful work.\u003c/li\u003e\n\u003cli\u003eHow the tools we use shape the way we think.\u003c/li\u003e\n\u003cli\u003eWhat \u0026quot;enough\u0026quot; actually means when it comes to money, ambition, and success.\u003c/li\u003e\n\u003c/ul\u003e\n","searchText":"Now What I am focused on right now, what I am reading, and what has my attention lately. now update \n## Working on\n\n- Redesigning this personal site into something calmer, clearer, and easier to read.\n- Learning programming more seriously while still building small things in public.\n- Writing more often, even if the idea is still rough.\n\n## Reading\n\n- *48 Laws of Power* by Robert Greene\n- *How to Stop Overthinking*\n\n## Thinking about\n\n- The difference between being productive and doing meaningful work.\n- How the tools we use shape the way we think.\n- What \"enough\" actually means when it comes to money, ambition, and success.\n","plainText":"Working on Redesigning this personal site into something calmer, clearer, and easier to read. Learning programming more seriously while still building small things in public. Writing more often, even if the idea is still rough. Reading 48 Laws of Power by Robert Greene How to Stop Overthinking Thinking about The difference between being productive and doing meaningful work. How the tools we use shape the way we think. What \u0026quot;enough\u0026quot; actually means when it comes to money, ambition, and success."},{"slug":"productivity-vs-meaning","title":"Productivity vs. Meaning","type":"note","status":"","sortDate":"2026-03-28T00:00:00.000Z","dateLabel":"March 28, 2026","summary":"A short note on doing more versus doing what actually matters.","tags":["note","work","meaning"],"featured":true,"html":"\u003cp\u003eIt\u0026#39;s easy to confuse motion with progress.\u003c/p\u003e\n\u003cp\u003eSome weeks feel productive because the checklist gets shorter. But the harder question is whether the work was worth doing in the first place.\u003c/p\u003e\n\u003cp\u003eI want to build a life where output matters, but direction matters more.\u003c/p\u003e\n","searchText":"Productivity vs. Meaning A short note on doing more versus doing what actually matters. note work meaning \nIt's easy to confuse motion with progress.\n\nSome weeks feel productive because the checklist gets shorter. But the harder question is whether the work was worth doing in the first place.\n\nI want to build a life where output matters, but direction matters more.\n","plainText":"It\u0026#39;s easy to confuse motion with progress. Some weeks feel productive because the checklist gets shorter. But the harder question is whether the work was worth doing in the first place. I want to build a life where output matters, but direction matters more."},{"slug":"how-tools-shape-thought","title":"How Tools Shape Thought","type":"note","status":"","sortDate":"2026-03-21T00:00:00.000Z","dateLabel":"March 21, 2026","summary":"Fast tools, slow tools, and the kinds of thinking each one encourages.","tags":["note","tools","thinking"],"featured":false,"html":"\u003cp\u003eEvery tool has an opinion about how you should think.\u003c/p\u003e\n\u003cp\u003eA fast notes app encourages capture. A slower one encourages reflection. A blank editor feels different from a feed, and both produce different kinds of thoughts.\u003c/p\u003e\n\u003cp\u003eI want to pay more attention to what my tools reward, not just what they let me do.\u003c/p\u003e\n","searchText":"How Tools Shape Thought Fast tools, slow tools, and the kinds of thinking each one encourages. note tools thinking \nEvery tool has an opinion about how you should think.\n\nA fast notes app encourages capture. A slower one encourages reflection. A blank editor feels different from a feed, and both produce different kinds of thoughts.\n\nI want to pay more attention to what my tools reward, not just what they let me do.\n","plainText":"Every tool has an opinion about how you should think. A fast notes app encourages capture. A slower one encourages reflection. A blank editor feels different from a feed, and both produce different kinds of thoughts. I want to pay more attention to what my tools reward, not just what they let me do."},{"slug":"what-enough-means","title":"What \"Enough\" Means","type":"note","status":"","sortDate":"2026-03-12T00:00:00.000Z","dateLabel":"March 12, 2026","summary":"If you never define enough, ambition can quietly become a trap.","tags":["note","ambition","life"],"featured":false,"html":"\u003cp\u003eMost people chase more without deciding what enough would look like.\u003c/p\u003e\n\u003cp\u003eMore money. More followers. More proof. More options.\u003c/p\u003e\n\u003cp\u003eThe problem is not ambition. The problem is having no line that tells you when the pursuit is serving your life and when your life is serving the pursuit.\u003c/p\u003e\n","searchText":"What \"Enough\" Means If you never define enough, ambition can quietly become a trap. note ambition life \nMost people chase more without deciding what enough would look like.\n\nMore money. More followers. More proof. More options.\n\nThe problem is not ambition. The problem is having no line that tells you when the pursuit is serving your life and when your life is serving the pursuit.\n","plainText":"Most people chase more without deciding what enough would look like. More money. More followers. More proof. More options. The problem is not ambition. The problem is having no line that tells you when the pursuit is serving your life and when your life is serving the pursuit."},{"slug":"personal-site","title":"Personal Site","type":"project","status":"live","sortDate":"2026-03-05T00:00:00.000Z","dateLabel":"Live","summary":"The site you are reading now. A personal archive for essays, notes, and project logs.","tags":["project","design","web"],"featured":true,"html":"\u003cp\u003eThis site is my home on the internet.\u003c/p\u003e\n\u003cp\u003eIt started as a terminal-style experiment, which was fun, but eventually I wanted something calmer and more readable. The new version keeps the DIY spirit while making the writing and project history much easier to browse.\u003c/p\u003e\n\u003cp\u003eThe goal is simple: one place for essays, notes, current focus, shipped work, and the things that failed but still taught me something.\u003c/p\u003e\n","searchText":"Personal Site The site you are reading now. A personal archive for essays, notes, and project logs. project design web \nThis site is my home on the internet.\n\nIt started as a terminal-style experiment, which was fun, but eventually I wanted something calmer and more readable. The new version keeps the DIY spirit while making the writing and project history much easier to browse.\n\nThe goal is simple: one place for essays, notes, current focus, shipped work, and the things that failed but still taught me something.\n","plainText":"This site is my home on the internet. It started as a terminal-style experiment, which was fun, but eventually I wanted something calmer and more readable. The new version keeps the DIY spirit while making the writing and project history much easier to browse. The goal is simple: one place for essays, notes, current focus, shipped work, and the things that failed but still taught me something."},{"slug":"local-first-sync-system","title":"Local-first Sync System","type":"project","status":"exploring","sortDate":"2026-02-25T00:00:00.000Z","dateLabel":"Exploring","summary":"An idea for syncing plain text files across devices without needing a traditional cloud account.","tags":["project","idea","local-first"],"featured":false,"html":"\u003cp\u003eI like tools that stay simple and portable.\u003c/p\u003e\n\u003cp\u003eThis idea keeps coming back: a local-first sync system for plain text files that feels lighter than a full cloud product. Something private, understandable, and boring in a good way.\u003c/p\u003e\n\u003cp\u003eI do not have the full shape of it yet, but the problem still feels worth returning to.\u003c/p\u003e\n","searchText":"Local-first Sync System An idea for syncing plain text files across devices without needing a traditional cloud account. project idea local-first \nI like tools that stay simple and portable.\n\nThis idea keeps coming back: a local-first sync system for plain text files that feels lighter than a full cloud product. Something private, understandable, and boring in a good way.\n\nI do not have the full shape of it yet, but the problem still feels worth returning to.\n","plainText":"I like tools that stay simple and portable. This idea keeps coming back: a local-first sync system for plain text files that feels lighter than a full cloud product. Something private, understandable, and boring in a good way. I do not have the full shape of it yet, but the problem still feels worth returning to."},{"slug":"reading-tracker","title":"Reading Tracker","type":"project","status":"paused","sortDate":"2026-02-16T00:00:00.000Z","dateLabel":"Paused","summary":"A web app idea that reminded me a simple text file often does the job better.","tags":["project","reading","paused"],"featured":false,"html":"\u003cp\u003eI started building a reading tracker because the idea sounded useful and satisfying.\u003c/p\u003e\n\u003cp\u003eHalfway through, I realized a plain text list already gave me most of what I actually needed. That made the project less exciting, but the lesson was valuable.\u003c/p\u003e\n\u003cp\u003eSometimes the best product decision is to stop building.\u003c/p\u003e\n","searchText":"Reading Tracker A web app idea that reminded me a simple text file often does the job better. project reading paused \nI started building a reading tracker because the idea sounded useful and satisfying.\n\nHalfway through, I realized a plain text list already gave me most of what I actually needed. That made the project less exciting, but the lesson was valuable.\n\nSometimes the best product decision is to stop building.\n","plainText":"I started building a reading tracker because the idea sounded useful and satisfying. Halfway through, I realized a plain text list already gave me most of what I actually needed. That made the project less exciting, but the lesson was valuable. Sometimes the best product decision is to stop building."},{"slug":"minimal-email-client","title":"Minimal Email Client","type":"project","status":"sketching","sortDate":"2026-02-02T00:00:00.000Z","dateLabel":"Sketching","summary":"A keyboard-first, text-heavy email client for people who want email to feel boring again.","tags":["project","idea","communication"],"featured":false,"html":"\u003cp\u003eMost email clients feel overloaded long before the inbox itself becomes the problem.\u003c/p\u003e\n\u003cp\u003eI keep thinking about a quieter alternative: plain text, keyboard-driven, simple threading, no visual noise, no pressure to turn email into a productivity sport.\u003c/p\u003e\n\u003cp\u003eI am still sketching the shape of it, but I like the constraint.\u003c/p\u003e\n","searchText":"Minimal Email Client A keyboard-first, text-heavy email client for people who want email to feel boring again. project idea communication \nMost email clients feel overloaded long before the inbox itself becomes the problem.\n\nI keep thinking about a quieter alternative: plain text, keyboard-driven, simple threading, no visual noise, no pressure to turn email into a productivity sport.\n\nI am still sketching the shape of it, but I like the constraint.\n","plainText":"Most email clients feel overloaded long before the inbox itself becomes the problem. I keep thinking about a quieter alternative: plain text, keyboard-driven, simple threading, no visual noise, no pressure to turn email into a productivity sport. I am still sketching the shape of it, but I like the constraint."},{"slug":"worth-it","title":"I Spent My Teens Chasing Dreams That All Failed. Was It Worth It?","type":"essay","status":"","sortDate":"2026-01-30T00:00:00.000Z","dateLabel":"January 30, 2026","summary":"On trying dropshipping, Amazon FBA, content creation, and programming before adulthood, and what those failures taught me.","tags":["essay","failure","learning"],"featured":true,"html":"\u003cp\u003eEveryone says I wasted my high school years.\nI was too serious. I did not enjoy enough. I started early.\nMaybe they are right. Maybe they are wrong.\nRead my story, then tell me what you think.\u003c/p\u003e\n\u003cp\u003eIt was October 2023 and I was in my first year of high school here in Japan.\nI hated school and almost every subject, even the ones I used to like, probably because of the language barrier. It had only been a year since I moved.\u003c/p\u003e\n\u003cp\u003eI was scrolling social media like every other teenager, but something felt off.\nMy feed was full of people talking about how easy it was to get rich online. They made the whole thing sound simple enough that every minute I spent doing nothing felt like I was falling behind, even though I was only sixteen.\u003c/p\u003e\n\u003cp\u003eThe first thing I tried was dropshipping.\u003c/p\u003e\n\u003cp\u003eI bought an online course, spent the rest of my savings on Shopify, a domain, and ads, and then spent months getting stuck and seeing no result. After four or five months, I cancelled everything and told myself maybe it was not for me.\u003c/p\u003e\n\u003cp\u003eThe guy who sold me the course was probably still making money. I was left with the lesson.\u003c/p\u003e\n\u003cp\u003eThen came the summer of 2024 and I tried Amazon FBA.\u003c/p\u003e\n\u003cp\u003eI asked my dad for two thousand dollars so I could build a small brand. He agreed. I found a supplier on Alibaba, picked water bottles, and aimed for the US market.\u003c/p\u003e\n\u003cp\u003eThe products reached Amazon warehouses. I was officially a brand owner at seventeen.\u003c/p\u003e\n\u003cp\u003eI waited for sales. I got one. Then nothing.\u003c/p\u003e\n\u003cp\u003eAfter months of staring at a blank dashboard, I paid Amazon to throw the inventory away so I could stop the extra costs. I still owe my dad for that mistake.\u003c/p\u003e\n\u003cp\u003eThen it was January 2025 and I decided to try content creation.\u003c/p\u003e\n\u003cp\u003eI made an account on X, thinking I would write about programming and AI. Later I found people talking about building products quickly and making money from them. That pulled me into the world of vibe coding.\u003c/p\u003e\n\u003cp\u003eI made a meme site called Snapmeme and posted about it. Every post got a handful of views. Nobody really cared, so eventually I gave up on that too.\u003c/p\u003e\n\u003cp\u003eI did not stop posting, though. Writing publicly still felt useful even when almost nobody saw it.\u003c/p\u003e\n\u003cp\u003eAt some point I decided I should actually learn how to program.\u003c/p\u003e\n\u003cp\u003eI bought a long Python course and started it, but then I saw more people talking about money made from quick MVPs and abandoned the course before finishing. I went back to building without enough foundations.\u003c/p\u003e\n\u003cp\u003eI am still building. I still do not know whether this path is right or wrong. I still do not know whether it will work.\u003c/p\u003e\n\u003cp\u003eBut I know this much now:\u003c/p\u003e\n\u003cp\u003eJust because someone on the internet got rich doing one thing does not mean you will fail at it.\nAnd just because they succeeded does not mean you will too.\u003c/p\u003e\n\u003cp\u003eFiguring things out is a skill.\u003c/p\u003e\n\u003cp\u003eMost of the time, the reason I gave up was not that the idea was impossible. It was that I got stuck and did not know how to keep going.\u003c/p\u003e\n\u003cp\u003eEven with all the failed attempts, I gained something real. I learned how to use tools I would never have touched otherwise. Shopify, WordPress, GitHub, VS Code, Xcode, AI tools, design tools, and more all entered my life because I kept trying things.\u003c/p\u003e\n\u003cp\u003eSo was it worth it?\u003c/p\u003e\n\u003cp\u003eI still do not have a clean answer.\u003c/p\u003e\n\u003cp\u003eBut I do think those failures gave me curiosity, the courage to start, and a better understanding of how the internet sells dreams.\u003c/p\u003e\n\u003cp\u003eAnd maybe that is worth something.\u003c/p\u003e\n","searchText":"I Spent My Teens Chasing Dreams That All Failed. Was It Worth It? On trying dropshipping, Amazon FBA, content creation, and programming before adulthood, and what those failures taught me. essay failure learning \nEveryone says I wasted my high school years.\nI was too serious. I did not enjoy enough. I started early.\nMaybe they are right. Maybe they are wrong.\nRead my story, then tell me what you think.\n\nIt was October 2023 and I was in my first year of high school here in Japan.\nI hated school and almost every subject, even the ones I used to like, probably because of the language barrier. It had only been a year since I moved.\n\nI was scrolling social media like every other teenager, but something felt off.\nMy feed was full of people talking about how easy it was to get rich online. They made the whole thing sound simple enough that every minute I spent doing nothing felt like I was falling behind, even though I was only sixteen.\n\nThe first thing I tried was dropshipping.\n\nI bought an online course, spent the rest of my savings on Shopify, a domain, and ads, and then spent months getting stuck and seeing no result. After four or five months, I cancelled everything and told myself maybe it was not for me.\n\nThe guy who sold me the course was probably still making money. I was left with the lesson.\n\nThen came the summer of 2024 and I tried Amazon FBA.\n\nI asked my dad for two thousand dollars so I could build a small brand. He agreed. I found a supplier on Alibaba, picked water bottles, and aimed for the US market.\n\nThe products reached Amazon warehouses. I was officially a brand owner at seventeen.\n\nI waited for sales. I got one. Then nothing.\n\nAfter months of staring at a blank dashboard, I paid Amazon to throw the inventory away so I could stop the extra costs. I still owe my dad for that mistake.\n\nThen it was January 2025 and I decided to try content creation.\n\nI made an account on X, thinking I would write about programming and AI. Later I found people talking about building products quickly and making money from them. That pulled me into the world of vibe coding.\n\nI made a meme site called Snapmeme and posted about it. Every post got a handful of views. Nobody really cared, so eventually I gave up on that too.\n\nI did not stop posting, though. Writing publicly still felt useful even when almost nobody saw it.\n\nAt some point I decided I should actually learn how to program.\n\nI bought a long Python course and started it, but then I saw more people talking about money made from quick MVPs and abandoned the course before finishing. I went back to building without enough foundations.\n\nI am still building. I still do not know whether this path is right or wrong. I still do not know whether it will work.\n\nBut I know this much now:\n\nJust because someone on the internet got rich doing one thing does not mean you will fail at it.\nAnd just because they succeeded does not mean you will too.\n\nFiguring things out is a skill.\n\nMost of the time, the reason I gave up was not that the idea was impossible. It was that I got stuck and did not know how to keep going.\n\nEven with all the failed attempts, I gained something real. I learned how to use tools I would never have touched otherwise. Shopify, WordPress, GitHub, VS Code, Xcode, AI tools, design tools, and more all entered my life because I kept trying things.\n\nSo was it worth it?\n\nI still do not have a clean answer.\n\nBut I do think those failures gave me curiosity, the courage to start, and a better understanding of how the internet sells dreams.\n\nAnd maybe that is worth something.\n","plainText":"Everyone says I wasted my high school years. I was too serious. I did not enjoy enough. I started early. Maybe they are right. Maybe they are wrong. Read my story, then tell me what you think. It was October 2023 and I was in my first year of high school here in Japan. I hated school and almost every subject, even the ones I used to like, probably because of the language barrier. It had only been a year since I moved. I was scrolling social media like every other teenager, but something felt off. My feed was full of people talking about how easy it was to get rich online. They made the whole thing sound simple enough that every minute I spent doing nothing felt like I was falling behind, even though I was only sixteen. The first thing I tried was dropshipping. I bought an online course, spent the rest of my savings on Shopify, a domain, and ads, and then spent months getting stuck and seeing no result. After four or five months, I cancelled everything and told myself maybe it was not for me. The guy who sold me the course was probably still making money. I was left with the lesson. Then came the summer of 2024 and I tried Amazon FBA. I asked my dad for two thousand dollars so I could build a small brand. He agreed. I found a supplier on Alibaba, picked water bottles, and aimed for the US market. The products reached Amazon warehouses. I was officially a brand owner at seventeen. I waited for sales. I got one. Then nothing. After months of staring at a blank dashboard, I paid Amazon to throw the inventory away so I could stop the extra costs. I still owe my dad for that mistake. Then it was January 2025 and I decided to try content creation. I made an account on X, thinking I would write about programming and AI. Later I found people talking about building products quickly and making money from them. That pulled me into the world of vibe coding. I made a meme site called Snapmeme and posted about it. Every post got a handful of views. Nobody really cared, so eventually I gave up on that too. I did not stop posting, though. Writing publicly still felt useful even when almost nobody saw it. At some point I decided I should actually learn how to program. I bought a long Python course and started it, but then I saw more people talking about money made from quick MVPs and abandoned the course before finishing. I went back to building without enough foundations. I am still building. I still do not know whether this path is right or wrong. I still do not know whether it will work. But I know this much now: Just because someone on the internet got rich doing one thing does not mean you will fail at it. And just because they succeeded does not mean you will too. Figuring things out is a skill. Most of the time, the reason I gave up was not that the idea was impossible. It was that I got stuck and did not know how to keep going. Even with all the failed attempts, I gained something real. I learned how to use tools I would never have touched otherwise. Shopify, WordPress, GitHub, VS Code, Xcode, AI tools, design tools, and more all entered my life because I kept trying things. So was it worth it? I still do not have a clean answer. But I do think those failures gave me curiosity, the courage to start, and a better understanding of how the internet sells dreams. And maybe that is worth something."},{"slug":"is-this-really-education","title":"Is This Really Education?","type":"essay","status":"","sortDate":"2026-01-08T00:00:00.000Z","dateLabel":"January 8, 2026","summary":"A short piece about school, attention, outdated systems, and why AI literacy should matter.","tags":["essay","education","school"],"featured":false,"html":"\u003cp\u003eRight now, I am sitting in a physics class.\u003c/p\u003e\n\u003cp\u003eThe teacher has been talking for more than forty minutes, but none of the students, including me, seem to care about what he is saying.\u003c/p\u003e\n\u003cp\u003eNone of us wants to be in this class, and we are clearly not interested. Yet somehow, we have all been placed here, either by our parents or by society.\u003c/p\u003e\n\u003cp\u003eI do not think this is only happening in Japan. I think it is happening in many countries.\u003c/p\u003e\n\u003cp\u003eThe education system feels broken and outdated.\u003c/p\u003e\n\u003cp\u003eThe other day I saw a student at our school who did not even know how to use ChatGPT. That surprised me, not because everyone should love AI, but because tools like this are already changing how people learn, work, and communicate.\u003c/p\u003e\n\u003cp\u003eSometimes I wonder what school would feel like if we taught coding, content creation, AI, communication, and real-world problem solving with the same seriousness as memorization.\u003c/p\u003e\n\u003cp\u003eSo the real question is simple:\u003c/p\u003e\n\u003cp\u003eHow long will education continue like this?\u003c/p\u003e\n","searchText":"Is This Really Education? A short piece about school, attention, outdated systems, and why AI literacy should matter. essay education school \nRight now, I am sitting in a physics class.\n\nThe teacher has been talking for more than forty minutes, but none of the students, including me, seem to care about what he is saying.\n\nNone of us wants to be in this class, and we are clearly not interested. Yet somehow, we have all been placed here, either by our parents or by society.\n\nI do not think this is only happening in Japan. I think it is happening in many countries.\n\nThe education system feels broken and outdated.\n\nThe other day I saw a student at our school who did not even know how to use ChatGPT. That surprised me, not because everyone should love AI, but because tools like this are already changing how people learn, work, and communicate.\n\nSometimes I wonder what school would feel like if we taught coding, content creation, AI, communication, and real-world problem solving with the same seriousness as memorization.\n\nSo the real question is simple:\n\nHow long will education continue like this?\n","plainText":"Right now, I am sitting in a physics class. The teacher has been talking for more than forty minutes, but none of the students, including me, seem to care about what he is saying. None of us wants to be in this class, and we are clearly not interested. Yet somehow, we have all been placed here, either by our parents or by society. I do not think this is only happening in Japan. I think it is happening in many countries. The education system feels broken and outdated. The other day I saw a student at our school who did not even know how to use ChatGPT. That surprised me, not because everyone should love AI, but because tools like this are already changing how people learn, work, and communicate. Sometimes I wonder what school would feel like if we taught coding, content creation, AI, communication, and real-world problem solving with the same seriousness as memorization. So the real question is simple: How long will education continue like this?"},{"slug":"on-friction-in-tools","title":"On Friction in Tools","type":"essay","status":"","sortDate":"2026-01-06T00:00:00.000Z","dateLabel":"January 6, 2026","summary":"A short essay on why speed is not always the same as clarity.","tags":["essay","tools","design"],"featured":false,"html":"\u003cp\u003eFriction is not always bad.\u003c/p\u003e\n\u003cp\u003eSome friction creates space for thought.\u003c/p\u003e\n\u003cp\u003eWhen everything is instant, we lose the pause. The moment to reconsider. The chance to change our minds before committing.\u003c/p\u003e\n\u003cp\u003eThe best tools know when to slow you down.\u003c/p\u003e\n","searchText":"On Friction in Tools A short essay on why speed is not always the same as clarity. essay tools design \nFriction is not always bad.\n\nSome friction creates space for thought.\n\nWhen everything is instant, we lose the pause. The moment to reconsider. The chance to change our minds before committing.\n\nThe best tools know when to slow you down.\n","plainText":"Friction is not always bad. Some friction creates space for thought. When everything is instant, we lose the pause. The moment to reconsider. The chance to change our minds before committing. The best tools know when to slow you down."},{"slug":"plain-text-notes","title":"Plain Text Notes","type":"project","status":"shipped","sortDate":"2025-11-01T00:00:00.000Z","dateLabel":"Shipped","summary":"A note-taking approach built around plain text files, simple editors, and long-term portability.","tags":["project","notes","plain-text"],"featured":false,"html":"\u003cp\u003eI like systems that still make sense after the excitement fades.\u003c/p\u003e\n\u003cp\u003ePlain text notes are not flashy, but they are portable, easy to back up, and readable almost anywhere. No lock-in, no heavy setup, no special environment required.\u003c/p\u003e\n\u003cp\u003eThe more tools I try, the more I respect simple formats that survive trends.\u003c/p\u003e\n","searchText":"Plain Text Notes A note-taking approach built around plain text files, simple editors, and long-term portability. project notes plain-text \nI like systems that still make sense after the excitement fades.\n\nPlain text notes are not flashy, but they are portable, easy to back up, and readable almost anywhere. No lock-in, no heavy setup, no special environment required.\n\nThe more tools I try, the more I respect simple formats that survive trends.\n","plainText":"I like systems that still make sense after the excitement fades. Plain text notes are not flashy, but they are portable, easy to back up, and readable almost anywhere. No lock-in, no heavy setup, no special environment required. The more tools I try, the more I respect simple formats that survive trends."},{"slug":"bookmark-exporter","title":"Bookmark Exporter","type":"project","status":"shipped","sortDate":"2025-09-12T00:00:00.000Z","dateLabel":"Shipped","summary":"A tiny tool for exporting browser bookmarks into plain text with less clutter and no account setup.","tags":["project","browser","utility"],"featured":false,"html":"\u003cp\u003eThis idea came from wanting a cleaner relationship with saved links.\u003c/p\u003e\n\u003cp\u003eInstead of keeping bookmarks trapped inside a browser UI, I wanted a simpler export into plain text so the links could be searched, edited, or moved anywhere.\u003c/p\u003e\n\u003cp\u003eSmall utilities like this do not look glamorous, but they often become the tools I use the longest.\u003c/p\u003e\n","searchText":"Bookmark Exporter A tiny tool for exporting browser bookmarks into plain text with less clutter and no account setup. project browser utility \nThis idea came from wanting a cleaner relationship with saved links.\n\nInstead of keeping bookmarks trapped inside a browser UI, I wanted a simpler export into plain text so the links could be searched, edited, or moved anywhere.\n\nSmall utilities like this do not look glamorous, but they often become the tools I use the longest.\n","plainText":"This idea came from wanting a cleaner relationship with saved links. Instead of keeping bookmarks trapped inside a browser UI, I wanted a simpler export into plain text so the links could be searched, edited, or moved anywhere. Small utilities like this do not look glamorous, but they often become the tools I use the longest."},{"slug":"snapmeme","title":"Snapmeme","type":"project","status":"failed","sortDate":"2025-05-11T00:00:00.000Z","dateLabel":"Failed","summary":"A meme site built quickly, posted publicly, and mostly ignored. A useful lesson in attention, distribution, and patience.","tags":["project","failure","internet"],"featured":false,"html":"\u003cp\u003eSnapmeme was one of my early attempts to build something quickly and post it online.\u003c/p\u003e\n\u003cp\u003eMaking it was exciting. Getting people to care was the hard part.\u003c/p\u003e\n\u003cp\u003eThe project failed, but it taught me something important: building is only one part of the job. Distribution, timing, consistency, and knowing who the work is for matter just as much.\u003c/p\u003e\n","searchText":"Snapmeme A meme site built quickly, posted publicly, and mostly ignored. A useful lesson in attention, distribution, and patience. project failure internet \nSnapmeme was one of my early attempts to build something quickly and post it online.\n\nMaking it was exciting. Getting people to care was the hard part.\n\nThe project failed, but it taught me something important: building is only one part of the job. Distribution, timing, consistency, and knowing who the work is for matter just as much.\n","plainText":"Snapmeme was one of my early attempts to build something quickly and post it online. Making it was exciting. Getting people to care was the hard part. The project failed, but it taught me something important: building is only one part of the job. Distribution, timing, consistency, and knowing who the work is for matter just as much."},{"slug":"amazon-fba","title":"Amazon FBA","type":"project","status":"failed","sortDate":"2024-08-01T00:00:00.000Z","dateLabel":"Failed","summary":"A first serious business attempt that cost money, confidence, and a few assumptions about how easy ecommerce would be.","tags":["project","failure","ecommerce"],"featured":false,"html":"\u003cp\u003eI treated Amazon FBA like a shortcut into business.\u003c/p\u003e\n\u003cp\u003eIt turned out to be more expensive, more uncertain, and less forgiving than the internet made it seem. I picked a product, got inventory into warehouses, and waited for traction that never really came.\u003c/p\u003e\n\u003cp\u003eLosing money hurt, especially because I borrowed from my dad. But the experience changed the way I think about risk, hype, and what it means to understand a market before committing to it.\u003c/p\u003e\n","searchText":"Amazon FBA A first serious business attempt that cost money, confidence, and a few assumptions about how easy ecommerce would be. project failure ecommerce \nI treated Amazon FBA like a shortcut into business.\n\nIt turned out to be more expensive, more uncertain, and less forgiving than the internet made it seem. I picked a product, got inventory into warehouses, and waited for traction that never really came.\n\nLosing money hurt, especially because I borrowed from my dad. But the experience changed the way I think about risk, hype, and what it means to understand a market before committing to it.\n","plainText":"I treated Amazon FBA like a shortcut into business. It turned out to be more expensive, more uncertain, and less forgiving than the internet made it seem. I picked a product, got inventory into warehouses, and waited for traction that never really came. Losing money hurt, especially because I borrowed from my dad. But the experience changed the way I think about risk, hype, and what it means to understand a market before committing to it."},{"slug":"dropshipping","title":"Dropshipping","type":"project","status":"failed","sortDate":"2023-11-01T00:00:00.000Z","dateLabel":"Failed","summary":"My first online business attempt, powered by internet promises and stopped by reality.","tags":["project","failure","learning"],"featured":false,"html":"\u003cp\u003eDropshipping was the first business model that made me feel like success might be one decision away.\u003c/p\u003e\n\u003cp\u003eI paid for a course, spent the rest of my savings on the store and ads, and discovered that simple business models become difficult the second real money and real uncertainty are involved.\u003c/p\u003e\n\u003cp\u003eIt failed, but it pushed me into a world of tools, ideas, and experiments I might never have touched otherwise.\u003c/p\u003e\n","searchText":"Dropshipping My first online business attempt, powered by internet promises and stopped by reality. project failure learning \nDropshipping was the first business model that made me feel like success might be one decision away.\n\nI paid for a course, spent the rest of my savings on the store and ads, and discovered that simple business models become difficult the second real money and real uncertainty are involved.\n\nIt failed, but it pushed me into a world of tools, ideas, and experiments I might never have touched otherwise.\n","plainText":"Dropshipping was the first business model that made me feel like success might be one decision away. I paid for a course, spent the rest of my savings on the store and ads, and discovered that simple business models become difficult the second real money and real uncertainty are involved. It failed, but it pushed me into a world of tools, ideas, and experiments I might never have touched otherwise."}]}</script>
   <script src="app.js"></script>
 </body>
 </html>

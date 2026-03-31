@@ -6,214 +6,259 @@ const matter = require('gray-matter');
 const { marked } = require('marked');
 
 const CONTENT_DIR = path.join(__dirname, '../content');
+const ARCHIVE_DIR = path.join(CONTENT_DIR, 'archive');
+const PROFILE_FILE = path.join(CONTENT_DIR, 'profile.md');
 const TEMPLATE_FILE = path.join(__dirname, '../index.template.html');
 const OUTPUT_FILE = path.join(__dirname, '../index.html');
 
-// Read all markdown files from a directory
-function readMarkdownFiles(dir) {
-  const files = fs.readdirSync(dir);
-  return files
-    .filter(file => file.endsWith('.md'))
-    .map(file => {
-      const filePath = path.join(dir, file);
-      const content = fs.readFileSync(filePath, 'utf8');
-      const parsed = matter(content);
-      return {
-        ...parsed.data,
-        content: parsed.content,
-        filename: file
-      };
-    })
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date descending
+marked.setOptions({
+  headerIds: false,
+  mangle: false
+});
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
-// Generate article list for writing section
-function generateWritingList(articles) {
-  return articles.map((article, index) => {
-    // Format date as "Day Mon DD YYYY" (e.g., "Thu Jan 08 2026")
-    const date = new Date(article.date);
-    const dateStr = date.toLocaleDateString('en-US', { 
-      weekday: 'short', 
-      year: 'numeric', 
-      month: 'short', 
-      day: '2-digit' 
-    });
-    return `
-  <div class="article-row"><span class="article-num">[${index + 1}]</span><span class="article-title">${article.title}</span><span class="article-date">${dateStr}</span></div>`;
+function readMarkdown(filePath) {
+  return matter(fs.readFileSync(filePath, 'utf8'));
+}
+
+function stripTags(html) {
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function serializeForScript(data) {
+  return JSON.stringify(data)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026');
+}
+
+function toSlug(filename, frontmatterSlug) {
+  if (frontmatterSlug) return frontmatterSlug;
+  return filename
+    .replace(/\.md$/, '')
+    .replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+
+function readProfile() {
+  const parsed = readMarkdown(PROFILE_FILE);
+  return {
+    name: parsed.data.name,
+    siteTitle: parsed.data.site_title || parsed.data.name,
+    tagline: parsed.data.tagline || '',
+    location: parsed.data.location || '',
+    intro: parsed.data.intro || [],
+    contact: parsed.data.contact || [],
+    currentFocus: parsed.data.current_focus || [],
+    readingNow: parsed.data.reading_now || [],
+    shelf: parsed.data.shelf || {},
+    bodyHtml: marked.parse(parsed.content.trim())
+  };
+}
+
+function readEntries() {
+  return fs.readdirSync(ARCHIVE_DIR)
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const filePath = path.join(ARCHIVE_DIR, file);
+      const parsed = readMarkdown(filePath);
+      const html = marked.parse(parsed.content.trim());
+      const slug = toSlug(file, parsed.data.slug);
+
+      return {
+        slug,
+        title: parsed.data.title,
+        type: parsed.data.type || 'note',
+        status: parsed.data.status || '',
+        sortDate: parsed.data.sort_date || parsed.data.date || '',
+        dateLabel: parsed.data.date_label || parsed.data.date || '',
+        summary: parsed.data.summary || '',
+        tags: parsed.data.tags || [],
+        featured: Boolean(parsed.data.featured),
+        html,
+        searchText: [
+          parsed.data.title || '',
+          parsed.data.summary || '',
+          (parsed.data.tags || []).join(' '),
+          parsed.content
+        ].join(' ')
+      };
+    })
+    .sort((a, b) => new Date(b.sortDate) - new Date(a.sortDate));
+}
+
+function countByType(entries) {
+  return entries.reduce((acc, entry) => {
+    acc[entry.type] = (acc[entry.type] || 0) + 1;
+    return acc;
+  }, {});
+}
+
+function renderContacts(contact) {
+  return contact.map((item) => (
+    `<a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.label)}</a>`
+  )).join('');
+}
+
+function renderFilterBar(counts) {
+  const filters = [
+    { key: 'all', label: 'all', count: Object.values(counts).reduce((sum, value) => sum + value, 0) },
+    { key: 'essay', label: 'essays', count: counts.essay || 0 },
+    { key: 'note', label: 'notes', count: counts.note || 0 },
+    { key: 'project', label: 'projects', count: counts.project || 0 },
+    { key: 'update', label: 'updates', count: counts.update || 0 }
+  ];
+
+  return filters.map((filter, index) => (
+    `<button class="filter-chip${index === 0 ? ' is-active' : ''}" data-filter="${filter.key}" type="button">
+      <span>${filter.label}</span>
+      <span>${filter.count}</span>
+    </button>`
+  )).join('');
+}
+
+function renderArchiveList(entries, activeSlug = '') {
+  return entries.map((entry) => {
+    const activeClass = entry.slug === activeSlug ? ' is-active' : '';
+    const status = entry.status
+      ? `<span class="entry-pill" data-tone="${escapeHtml(entry.status)}">${escapeHtml(entry.status)}</span>`
+      : '';
+
+    return `<button class="archive-item${activeClass}" data-slug="${escapeHtml(entry.slug)}" type="button">
+      <span class="archive-meta">
+        <span>${escapeHtml(entry.type)}</span>
+        <span>${escapeHtml(entry.dateLabel)}</span>
+      </span>
+      <strong>${escapeHtml(entry.title)}</strong>
+      <span class="archive-summary">${escapeHtml(entry.summary)}</span>
+      <span class="archive-pills">${status}</span>
+    </button>`;
   }).join('');
 }
 
-// Generate individual article templates
-function generateArticleTemplates(articles) {
-  return articles.map((article, index) => {
-    const html = marked(article.content);
-    return `
-    <!-- ARTICLE ${index + 1} -->
-    <template id="tpl-article-${index + 1}">
-<p class="cmd-echo">$ cat ~/writing/${article.filename.replace('.md', '.txt')}</p>
-<article class="full-article">
-  <h2>${article.title}</h2>
-  <p class="article-meta">${new Date(article.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-  
-  <div class="article-body">
-    ${html}
-  </div>
-</article>
-<p class="nav-hint">type 'writing' to go back · or enter another command</p>
-    </template>`;
-  }).join('\n');
+function renderShelfList(items) {
+  return (items || []).map((item) => `<li>${escapeHtml(item)}</li>`).join('');
 }
 
-// Generate key-value display for structured sections
-function generateKVList(sections) {
-  return sections.map(section => {
-    const key = section.name;
-    const value = section.items.map(item => {
-      if (item.status) {
-        return `${item.name} (${item.status})`;
-      }
-      if (item.author) {
-        return item.name;
-      }
-      if (item.year) {
-        return `${item.name} '${item.year.toString().slice(2)}`;
-      }
-      return item.name;
-    }).join(', ');
-    return `  <div class="kv-row"><span class="kv-key">${key}</span><span class="kv-val">${value}</span></div>`;
-  }).join('\n');
+function renderFeatured(entries) {
+  const featuredEntries = entries.filter((entry) => entry.featured).slice(0, 4);
+
+  return featuredEntries.map((entry) => {
+    const status = entry.status
+      ? `<span class="entry-pill" data-tone="${escapeHtml(entry.status)}">${escapeHtml(entry.status)}</span>`
+      : '';
+
+    return `<button class="featured-card" data-slug="${escapeHtml(entry.slug)}" type="button">
+      <span class="archive-meta">
+        <span>${escapeHtml(entry.type)}</span>
+        <span>${escapeHtml(entry.dateLabel)}</span>
+      </span>
+      <h3>${escapeHtml(entry.title)}</h3>
+      <p>${escapeHtml(entry.summary)}</p>
+      ${status}
+    </button>`;
+  }).join('');
 }
 
-// Generate detail templates for drill-down sections
-function generateDetailTemplates(sectionName, sections) {
-  return sections.map(section => {
-    const safeName = section.name.replace(/\s+/g, '-').toLowerCase();
-    const title = section.title || section.name.charAt(0).toUpperCase() + section.name.slice(1);
-    
-    const items = section.items.map(item => {
-      let statusHtml = item.status ? `<span class="detail-status">[${item.status}]</span>` : '';
-      if (item.author) {
-        statusHtml = `<span class="detail-status">${item.author}</span>`;
-      }
-      if (item.year) {
-        statusHtml = `<span class="detail-status">[${item.year}]</span>`;
-      }
-      
-      return `  <div class="detail-item">
-    <span class="detail-name">→ ${item.name}</span>${statusHtml ? '\n    ' + statusHtml : ''}
-    <p class="detail-desc">${item.desc || ''}</p>
-  </div>`;
-    }).join('\n');
+function renderOverview(profile, entries) {
+  return `<section class="overview">
+    <div class="overview-hero">
+      <p class="eyebrow">reading room</p>
+      <h2>${escapeHtml(profile.name)}</h2>
+      <p class="lead">${escapeHtml(profile.tagline)}</p>
+      <div class="overview-copy">${profile.bodyHtml}</div>
+    </div>
 
-    return `
-    <!-- ${sectionName.toUpperCase()} - ${section.name.toUpperCase()} -->
-    <template id="tpl-${sectionName}-${safeName}">
-<p class="cmd-echo">$ cat ~/${sectionName}/${safeName}.txt</p>
-<h2># ${title}</h2>
+    <div class="overview-grid">
+      <section class="overview-card">
+        <p class="section-label">current focus</p>
+        <ul class="stack-list">
+          ${profile.currentFocus.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+        </ul>
+      </section>
 
-<div class="detail-list">
-${items}
-</div>
-<p class="nav-hint">type 'back' to return to ${sectionName} · or another command</p>
-    </template>`;
-  }).join('\n');
+      <section class="overview-card">
+        <p class="section-label">reading now</p>
+        <ul class="stack-list">
+          ${profile.readingNow.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+        </ul>
+      </section>
+
+      <section class="overview-card">
+        <p class="section-label">shelf</p>
+        <div class="shelf-grid">
+          <div>
+            <span>books</span>
+            <ul>${renderShelfList(profile.shelf.books)}</ul>
+          </div>
+          <div>
+            <span>films</span>
+            <ul>${renderShelfList(profile.shelf.films)}</ul>
+          </div>
+          <div>
+            <span>music</span>
+            <ul>${renderShelfList(profile.shelf.music)}</ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="featured-section">
+      <div class="section-heading">
+        <p class="section-label">selected entries</p>
+        <p class="section-note">${entries.length} entries in the archive</p>
+      </div>
+      <div class="featured-grid">
+        ${renderFeatured(entries)}
+      </div>
+    </section>
+  </section>`;
 }
 
-// Build the site
 function build() {
-  console.log('🔨 Building site...\n');
+  console.log('Building archive site...');
 
-  // Read content files
-  console.log('📖 Reading content files...');
-  const articles = readMarkdownFiles(path.join(CONTENT_DIR, 'writing'));
-  const nowData = matter(fs.readFileSync(path.join(CONTENT_DIR, 'now.md'), 'utf8')).data;
-  const workData = matter(fs.readFileSync(path.join(CONTENT_DIR, 'work.md'), 'utf8')).data;
-  const lifeData = matter(fs.readFileSync(path.join(CONTENT_DIR, 'life.md'), 'utf8')).data;
-  const aboutData = matter(fs.readFileSync(path.join(CONTENT_DIR, 'about.md'), 'utf8')).data;
-  const linksData = matter(fs.readFileSync(path.join(CONTENT_DIR, 'links.md'), 'utf8')).data;
+  const profile = readProfile();
+  const entries = readEntries();
+  const counts = countByType(entries);
+  const siteData = {
+    profile,
+    counts,
+    entries: entries.map((entry) => ({
+      ...entry,
+      plainText: stripTags(entry.html)
+    }))
+  };
 
-  console.log(`  ✓ Found ${articles.length} articles`);
-  console.log(`  ✓ Loaded now, work, life, about, links\n`);
-
-  // Read template
-  console.log('📝 Reading template...');
   let template = fs.readFileSync(TEMPLATE_FILE, 'utf8');
-  console.log('  ✓ Template loaded\n');
-
-  // Generate content
-  console.log('⚙️  Generating templates...');
-  
-  // Writing section
-  const writingList = generateWritingList(articles);
-  const articleTemplates = generateArticleTemplates(articles);
-  
-  // Now section
-  const nowKV = generateKVList(nowData.sections);
-  const nowDetails = generateDetailTemplates('now', nowData.sections);
-  
-  // Work section
-  const workKV = generateKVList(workData.sections);
-  const workDetails = generateDetailTemplates('work', workData.sections);
-  
-  // Life section
-  const lifeKV = generateKVList(lifeData.sections);
-  const lifeDetails = generateDetailTemplates('life', lifeData.sections);
-  
-  // About section
-  const aboutIntro = aboutData.intro.map(p => `  <p>${p}</p>`).join('\n');
-  const aboutSiteKV = Object.entries(aboutData.site).map(([key, value]) =>
-    `  <div class="kv-row"><span class="kv-key">${key}</span><span class="kv-val">${value}</span></div>`
-  ).join('\n');
-  const aboutContactKV = `  <div class="kv-row"><span class="kv-key">email</span><span class="kv-val"><a href="mailto:${aboutData.contact.email}">${aboutData.contact.email}</a></span></div>
-  <div class="kv-row"><span class="kv-key">twitter</span><span class="kv-val"><a href="${aboutData.contact.twitter_url}" target="_blank">${aboutData.contact.twitter}</a></span></div>
-  <div class="kv-row"><span class="kv-key">github</span><span class="kv-val"><a href="${aboutData.contact.github_url}" target="_blank">${aboutData.contact.github}</a></span></div>`;
-
-  // Links section
-  const linksSections = linksData.sections.map(section => {
-    const items = section.items.map(item => {
-      if (item.url) {
-        return `  <li><a href="${item.url}" target="_blank">${item.name}</a>${item.desc ? ` — ${item.desc}` : ''}</li>`;
-      } else {
-        return `  <li><span class="name">${item.name}</span>${item.desc ? ` — ${item.desc}` : ''}</li>`;
-      }
-    }).join('\n');
-    
-    return `<h3>## ${section.name}</h3>
-<ul>
-${items}
-</ul>`;
-  }).join('\n\n');
-
-  console.log('  ✓ Generated all templates\n');
-
-  // Replace placeholders in template
-  console.log('🔄 Injecting content...');
   template = template
-    .replace('<!-- WRITING_LIST -->', writingList)
-    .replace('<!-- ARTICLE_TEMPLATES -->', articleTemplates)
-    .replace('<!-- NOW_KV -->', nowKV)
-    .replace('<!-- NOW_DETAILS -->', nowDetails)
-    .replace('  <div class="kv-row"><span class="kv-key">Last updated</span><span class="kv-val">January 2026</span></div>', `  <div class="kv-row"><span class="kv-key">Last updated</span><span class="kv-val">${nowData.updated}</span></div>`)
-    .replace('<!-- WORK_KV -->', workKV)
-    .replace('<!-- WORK_DETAILS -->', workDetails)
-    .replace('<!-- LIFE_KV -->', lifeKV)
-    .replace('<!-- LIFE_DETAILS -->', lifeDetails)
-    .replace('<!-- ABOUT_INTRO -->', aboutIntro)
-    .replace('<!-- ABOUT_SITE_KV -->', aboutSiteKV)
-    .replace('<!-- ABOUT_CONTACT_KV -->', aboutContactKV)
-    .replace('<!-- LINKS_SECTIONS -->', linksSections);
+    .replace(/<!-- PAGE_TITLE -->/g, escapeHtml(profile.siteTitle))
+    .replace(/<!-- PROFILE_NAME -->/g, escapeHtml(profile.name))
+    .replace(/<!-- PROFILE_TAGLINE -->/g, escapeHtml(profile.tagline))
+    .replace(/<!-- PROFILE_LOCATION -->/g, escapeHtml(profile.location))
+    .replace(/<!-- PROFILE_CONTACT_LINKS -->/g, renderContacts(profile.contact))
+    .replace(/<!-- INITIAL_FILTERS -->/g, renderFilterBar(counts))
+    .replace(/<!-- INITIAL_ARCHIVE_LIST -->/g, renderArchiveList(entries))
+    .replace(/<!-- INITIAL_READER -->/g, renderOverview(profile, entries))
+    .replace(/<!-- SITE_DATA -->/g, serializeForScript(siteData));
 
-  // Write output
   fs.writeFileSync(OUTPUT_FILE, template);
-  console.log('  ✓ Content injected\n');
-
-  console.log(`✅ Build complete! Generated ${OUTPUT_FILE}\n`);
+  console.log(`Built ${OUTPUT_FILE}`);
 }
 
-// Run build
 try {
   build();
 } catch (error) {
-  console.error('❌ Build failed:', error);
+  console.error('Build failed.');
+  console.error(error);
   process.exit(1);
 }
