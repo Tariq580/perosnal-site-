@@ -5,9 +5,334 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="What I am focused on right now, what I am reading, and what has my attention lately.">
   <title>Now — Arian</title>
-  <link rel="stylesheet" href="../../styles.css">
+  <style>:root {
+  --paper: #f8f6ef;
+  --white: #ffffff;
+  --ink: #141414;
+  --muted: #8b8b8b;
+  --line: #ece7de;
+  --soft: #f3f1ea;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.home-page {
+  background: var(--paper);
+}
+
+.entry-page {
+  background: var(--white);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.home-shell {
+  width: min(760px, calc(100vw - 40px));
+  margin: 0 auto;
+  padding: 72px 0 104px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  background: var(--soft);
+}
+
+.hero-top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.hero h1,
+.entry-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.hero-tagline {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.97rem;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.social-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.social-links a:hover,
+.back-link:hover,
+.external-link:hover {
+  color: var(--ink);
+}
+
+.hero-text {
+  margin-top: 10px;
+}
+
+.hero-line,
+.location-line {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.location-line {
+  margin-top: 10px;
+}
+
+.section-block {
+  margin-top: 52px;
+}
+
+.section-block h2 {
+  margin: 0 0 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.list-grid {
+  display: grid;
+  gap: 6px;
+}
+
+.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.list-item:hover {
+  background: var(--soft);
+  border-color: var(--line);
+  transform: translateY(-1px);
+}
+
+.item-copy {
+  min-width: 0;
+}
+
+.item-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.item-title {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.item-summary,
+.item-meta,
+.entry-meta,
+.entry-summary,
+.entry-body,
+.back-link,
+.external-link,
+.tag-list span {
+  color: var(--muted);
+}
+
+.item-summary {
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.item-meta {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.86rem;
+  text-transform: lowercase;
+}
+
+.item-arrow {
+  flex-shrink: 0;
+  color: #b9b9b9;
+  font-size: 1rem;
+}
+
+.entry-shell {
+  width: min(720px, calc(100vw - 40px));
+  margin: 0 auto;
+  padding: 56px 0 100px;
+}
+
+.back-link {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.entry-header {
+  margin-top: 28px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px;
+}
+
+.entry-meta {
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  text-transform: lowercase;
+}
+
+.entry-summary {
+  margin: 18px 0 0;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.external-link {
+  display: inline-block;
+  margin-top: 18px;
+  text-decoration: none;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.tag-list span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--soft);
+  font-size: 0.82rem;
+}
+
+.entry-body {
+  padding-top: 28px;
+  font-size: 1.02rem;
+  line-height: 1.9;
+}
+
+.entry-body h2,
+.entry-body h3 {
+  margin: 2.2em 0 0.7em;
+  color: var(--ink);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.entry-body p,
+.entry-body ul,
+.entry-body ol,
+.entry-body blockquote {
+  margin: 0 0 1.1em;
+}
+
+.entry-body ul,
+.entry-body ol {
+  padding-left: 1.35em;
+}
+
+.entry-body li + li {
+  margin-top: 0.45em;
+}
+
+.entry-body strong {
+  color: var(--ink);
+}
+
+.entry-body blockquote {
+  margin-left: 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--line);
+}
+
+@media (max-width: 760px) {
+  .home-shell,
+  .entry-shell {
+    width: min(100vw - 24px, 760px);
+    padding-top: 28px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+  }
+
+  .hero-top {
+    flex-direction: column;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .list-item {
+    align-items: start;
+  }
+}
+</style>
 </head>
-<body>
+<body class="entry-page">
   <main class="entry-shell">
     <a class="back-link" href="../../">← back home</a>
 

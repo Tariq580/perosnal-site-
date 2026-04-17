@@ -12,6 +12,7 @@ const PROFILE_FILE = path.join(CONTENT_DIR, 'profile.md');
 const HOME_TEMPLATE_FILE = path.join(ROOT, 'index.template.html');
 const ENTRY_TEMPLATE_FILE = path.join(ROOT, 'entry.template.html');
 const OUTPUT_FILE = path.join(ROOT, 'index.html');
+const STYLE_FILE = path.join(ROOT, 'styles.css');
 const GENERATED_DIRS = ['articles', 'notes', 'projects', 'updates'];
 
 marked.setOptions({
@@ -126,7 +127,7 @@ function readEntries() {
 function renderSocialLinks(profile) {
   return profile.contact.map((item) => (
     `<a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(item.label)}</a>`
-  )).join('');
+  )).join('\n');
 }
 
 function renderList(entries) {
@@ -154,10 +155,12 @@ function renderHome(profile, entries) {
   const failedProjects = projects.filter((entry) => entry.status === 'failed');
   const essays = entries.filter((entry) => entry.type === 'essay');
   const notesAndUpdates = entries.filter((entry) => entry.type === 'note' || entry.type === 'update');
+  const inlineStyles = fs.readFileSync(STYLE_FILE, 'utf8');
 
   let template = fs.readFileSync(HOME_TEMPLATE_FILE, 'utf8');
   template = template
     .replace(/<!-- PAGE_TITLE -->/g, escapeHtml(profile.siteTitle))
+    .replace(/<!-- INLINE_STYLES -->/g, inlineStyles)
     .replace(/<!-- PROFILE_NAME -->/g, escapeHtml(profile.name))
     .replace(/<!-- PROFILE_TAGLINE -->/g, escapeHtml(profile.tagline))
     .replace(/<!-- PROFILE_LOCATION -->/g, escapeHtml(profile.location))
@@ -185,11 +188,12 @@ function renderTags(entry) {
 function renderEntryPage(profile, entry) {
   const outputDir = path.join(ROOT, entry.path);
   ensureDir(outputDir);
+  const inlineStyles = fs.readFileSync(STYLE_FILE, 'utf8');
 
   let template = fs.readFileSync(ENTRY_TEMPLATE_FILE, 'utf8');
   template = template
     .replace(/<!-- PAGE_TITLE -->/g, escapeHtml(`${entry.title} — ${profile.siteTitle}`))
-    .replace(/<!-- ASSET_PREFIX -->/g, '../../')
+    .replace(/<!-- INLINE_STYLES -->/g, inlineStyles)
     .replace(/<!-- HOME_LINK -->/g, '../../')
     .replace(/<!-- ENTRY_META -->/g, escapeHtml(entryMeta(entry)))
     .replace(/<!-- ENTRY_TITLE -->/g, escapeHtml(entry.title))

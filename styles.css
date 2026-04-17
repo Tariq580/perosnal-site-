@@ -1,10 +1,11 @@
 :root {
-  --bg: #ffffff;
-  --ink: #101010;
-  --muted: #7a7a7a;
-  --line: #ececec;
-  --soft: #f7f7f7;
-  --radius: 18px;
+  --paper: #f8f6ef;
+  --white: #ffffff;
+  --ink: #141414;
+  --muted: #8b8b8b;
+  --line: #ece7de;
+  --soft: #f3f1ea;
+  --radius: 16px;
 }
 
 * {
@@ -17,11 +18,18 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
   color: var(--ink);
   font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+.home-page {
+  background: var(--paper);
+}
+
+.entry-page {
+  background: var(--white);
 }
 
 a {
@@ -34,21 +42,21 @@ img {
 }
 
 .home-shell {
-  width: min(860px, calc(100vw - 40px));
+  width: min(760px, calc(100vw - 40px));
   margin: 0 auto;
-  padding: 64px 0 96px;
+  padding: 72px 0 104px;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 18px;
   align-items: start;
 }
 
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 76px;
+  height: 76px;
   border-radius: 999px;
   object-fit: cover;
   border: 1px solid var(--line);
@@ -65,29 +73,29 @@ img {
 .hero h1,
 .entry-header h1 {
   margin: 0;
-  font-size: clamp(2.3rem, 5vw, 3.8rem);
-  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 500;
   letter-spacing: -0.04em;
-  line-height: 0.95;
+  line-height: 0.98;
 }
 
 .hero-tagline {
-  margin: 10px 0 0;
+  margin: 8px 0 0;
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 0.97rem;
 }
 
 .social-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  padding-top: 8px;
+  gap: 14px;
+  padding-top: 4px;
 }
 
 .social-links a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
 .social-links a:hover,
@@ -97,35 +105,35 @@ img {
 }
 
 .hero-text {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .hero-line,
 .location-line {
   margin: 0;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.7;
+  font-size: 0.98rem;
+  line-height: 1.65;
 }
 
 .location-line {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .section-block {
-  margin-top: 56px;
+  margin-top: 52px;
 }
 
 .section-block h2 {
   margin: 0 0 16px;
-  font-size: 1.18rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
 .list-grid {
   display: grid;
-  gap: 12px;
+  gap: 6px;
 }
 
 .two-col {
@@ -137,7 +145,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 18px;
+  padding: 11px 12px;
   border: 1px solid transparent;
   border-radius: var(--radius);
   text-decoration: none;
@@ -157,12 +165,12 @@ img {
 .item-line {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   align-items: baseline;
 }
 
 .item-title {
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.35;
 }
@@ -179,52 +187,49 @@ img {
 }
 
 .item-summary {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.98rem;
+  line-height: 1.45;
 }
 
 .item-meta {
   display: inline-block;
-  margin-top: 8px;
-  font-size: 0.88rem;
+  margin-top: 4px;
+  font-size: 0.86rem;
   text-transform: lowercase;
 }
 
 .item-arrow {
   flex-shrink: 0;
-  color: #b2b2b2;
-  font-size: 1.2rem;
+  color: #b9b9b9;
+  font-size: 1rem;
 }
 
 .entry-shell {
-  width: min(760px, calc(100vw - 40px));
+  width: min(720px, calc(100vw - 40px));
   margin: 0 auto;
-  padding: 44px 0 96px;
+  padding: 56px 0 100px;
 }
 
 .back-link {
   text-decoration: none;
-  font-size: 0.96rem;
-}
-
-.entry-card {
-  margin-top: 24px;
+  font-size: 0.9rem;
 }
 
 .entry-header {
+  margin-top: 28px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 24px;
 }
 
 .entry-meta {
   margin: 0 0 12px;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   text-transform: lowercase;
 }
 
 .entry-summary {
   margin: 18px 0 0;
-  font-size: 1.08rem;
+  font-size: 1rem;
   line-height: 1.75;
 }
 
@@ -250,7 +255,7 @@ img {
 
 .entry-body {
   padding-top: 28px;
-  font-size: 1.06rem;
+  font-size: 1.02rem;
   line-height: 1.9;
 }
 
@@ -294,7 +299,7 @@ img {
   .home-shell,
   .entry-shell {
     width: min(100vw - 24px, 760px);
-    padding-top: 24px;
+    padding-top: 28px;
   }
 
   .hero {
@@ -302,8 +307,8 @@ img {
   }
 
   .avatar {
-    width: 88px;
-    height: 88px;
+    width: 72px;
+    height: 72px;
   }
 
   .hero-top {
