@@ -1,46 +1,67 @@
-# Arian Archive
+# Arian Site
 
-A monochrome personal archive built from Markdown. The site is static, simple to host on GitHub Pages, and designed around one archive index plus a focused reader view.
+A simple static personal site inspired by clean index-style homepages: profile at the top, grouped categories on the homepage, and separate white reading pages for every entry.
 
-## What Changed
+## How It Works
 
-- The old terminal UI is gone.
-- Content now lives in one unified archive system.
-- Each item is written in Markdown with frontmatter.
-- The interface is a monochrome archive with filters, search, and a reader panel.
+- `index.html` is the homepage
+- every item gets its own generated page
+- content is still written in Markdown
+- the site stays fully static and GitHub Pages friendly
 
 ## Structure
 
 ```text
+assets/
+  avatar-placeholder.svg
 content/
-  profile.md          # Site identity, intro, links, current focus, shelf
+  profile.md
   archive/
-    2026-04-01-now.md
-    2026-03-28-productivity-vs-meaning.md
     2026-03-05-personal-site.md
+    2026-03-28-productivity-vs-meaning.md
     ...
 scripts/
-  build.js            # Builds index.html from Markdown
-  new-article.js      # Creates a new archive entry
-index.template.html   # Base HTML shell
-app.js                # Client-side archive interactions
-styles.css            # Site styling
-index.html            # Generated output for GitHub Pages
+  build.js
+  new-article.js
+index.template.html
+entry.template.html
+styles.css
+index.html
+articles/
+notes/
+projects/
+updates/
 ```
 
-## Content Model
+## Profile
 
-Every archive entry is a Markdown file inside `content/archive/`.
+Edit `content/profile.md` to change:
+
+- name
+- tagline
+- avatar path
+- location
+- intro lines
+- social links
+
+To replace the profile picture, either:
+
+1. replace `assets/avatar-placeholder.svg`, or
+2. change the `avatar:` path in `content/profile.md`
+
+## Archive Entries
+
+Every entry is a Markdown file in `content/archive/`.
 
 Example:
 
 ```md
 ---
-title: A Short Thought
+title: A short thought
 type: note
-sort_date: 2026-04-01
-date_label: April 1, 2026
-summary: One sentence on what this is about.
+sort_date: 2026-04-18
+date_label: April 18, 2026
+summary: One-line description for the homepage.
 tags:
   - note
   - thinking
@@ -49,35 +70,21 @@ tags:
 Write here.
 ```
 
-Supported `type` values:
+Supported types:
 
 - `essay`
 - `note`
 - `project`
 - `update`
 
-Optional fields for projects:
+Optional project fields:
 
-- `status`: `live`, `shipped`, `paused`, `failed`, `exploring`, `sketching`
+```md
+status: live
+project_url: https://example.com/my-project
+```
 
-Useful optional fields:
-
-- `featured: true`
-- `tags:`
-
-## Profile File
-
-`content/profile.md` controls the site header and overview:
-
-- name
-- site title
-- tagline
-- location
-- intro
-- contact links
-- current focus
-- reading now
-- shelf lists
+`project_url` is shown on the generated project page as a link you can replace later with the real one.
 
 ## Commands
 
@@ -93,7 +100,7 @@ Build the site:
 npm run build
 ```
 
-Watch and rebuild on changes:
+Watch for changes:
 
 ```bash
 npm run dev
@@ -102,14 +109,14 @@ npm run dev
 Create a new entry:
 
 ```bash
-npm run new essay "My New Essay"
-npm run new note "A quick thought"
-npm run new project "Something I'm exploring"
+npm run new essay "My New Article"
+npm run new note "Quick Thought"
+npm run new project "New Project"
 ```
 
 ## Local Preview
 
-After building, preview locally:
+After building:
 
 ```bash
 python3 -m http.server 8080
@@ -119,34 +126,24 @@ Then open:
 
 `http://localhost:8080`
 
-## GitHub Pages Deployment
+## GitHub Pages
 
-Because this site is static, deployment is still simple.
-
-When you are happy with the result:
+Because the site is static, deployment is still:
 
 ```bash
 npm run build
 git status
 git add .
-git commit -m "Redesign personal archive"
+git commit -m "Update site"
 git push
 ```
 
-If your GitHub Pages setup already publishes from this repository and your custom domain is already connected through `CNAME`, pushing the updated `index.html` is enough.
+Make sure you commit the generated folders too:
 
-## Push Checklist
+- `index.html`
+- `articles/`
+- `notes/`
+- `projects/`
+- `updates/`
 
-Before pushing:
-
-1. Run `npm run build`
-2. Check `index.html` updated
-3. Check `git status`
-4. Preview locally if you want one last pass
-5. Commit and push
-
-## Notes
-
-- `index.html` is generated, so rebuild after changing content or templates.
-- Hosting stays compatible with GitHub Pages and a custom domain.
-- No backend is required.
+Your custom domain continues to work through GitHub Pages and the existing `CNAME` file.

@@ -5,6 +5,7 @@ status: sketching
 sort_date: 2026-02-02
 date_label: Sketching
 summary: A keyboard-first, text-heavy email client for people who want email to feel boring again.
+project_url: https://example.com/minimal-email-client
 tags:
   - project
   - idea

@@ -3,54 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A monochrome personal archive of notes, essays, and project logs.">
+  <meta name="description" content="A simple home for projects, essays, notes, and thoughts.">
   <title><!-- PAGE_TITLE --></title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page-shell">
-    <header class="masthead">
-      <div class="masthead-copy">
-        <p class="eyebrow">personal archive</p>
-        <h1><!-- PROFILE_NAME --></h1>
-        <p class="tagline"><!-- PROFILE_TAGLINE --></p>
-      </div>
+  <main class="home-shell">
+    <header class="hero">
+      <img class="avatar" src="<!-- PROFILE_AVATAR -->" alt="<!-- PROFILE_NAME --> portrait">
 
-      <div class="masthead-meta">
-        <p class="meta-line">based in <!-- PROFILE_LOCATION --></p>
-        <div class="contact-list"><!-- PROFILE_CONTACT_LINKS --></div>
-        <button class="home-link" id="home-link" type="button">Overview</button>
-        <button class="archive-toggle" id="archive-toggle" type="button" aria-expanded="false" aria-controls="archive-panel">
-          Browse archive
-        </button>
+      <div class="hero-copy">
+        <div class="hero-top">
+          <div>
+            <h1><!-- PROFILE_NAME --></h1>
+            <p class="hero-tagline"><!-- PROFILE_TAGLINE --></p>
+          </div>
+
+          <nav class="social-links" aria-label="Social links">
+            <!-- SOCIAL_LINKS -->
+          </nav>
+        </div>
+
+        <div class="hero-text">
+          <!-- PROFILE_INTRO -->
+        </div>
+
+        <p class="location-line">based in <!-- PROFILE_LOCATION --></p>
       </div>
     </header>
 
-    <main class="workspace">
-      <aside class="archive-panel" id="archive-panel">
-        <div class="archive-panel-head">
-          <p class="section-label">index</p>
-          <h2>Everything</h2>
-        </div>
+    <section class="section-block">
+      <h2>things i'm working on // things i've built</h2>
+      <div class="list-grid two-col">
+        <!-- PROJECT_ITEMS -->
+      </div>
+    </section>
 
-        <div class="archive-tools">
-          <label class="search-label" for="search-input">Search</label>
-          <input id="search-input" type="search" placeholder="essay, project, note..." autocomplete="off">
-          <div class="filter-bar" id="filter-bar"><!-- INITIAL_FILTERS --></div>
-        </div>
+    <section class="section-block">
+      <h2>articles i've written</h2>
+      <div class="list-grid">
+        <!-- ARTICLE_ITEMS -->
+      </div>
+    </section>
 
-        <div class="archive-list" id="archive-list"><!-- INITIAL_ARCHIVE_LIST --></div>
-      </aside>
+    <section class="section-block">
+      <h2>notes / thoughts / now</h2>
+      <div class="list-grid">
+        <!-- NOTE_ITEMS -->
+      </div>
+    </section>
 
-      <section class="reader-panel">
-        <div class="reader-view" id="reader-view"><!-- INITIAL_READER --></div>
-      </section>
-    </main>
-  </div>
-
-  <button class="archive-scrim" id="archive-scrim" type="button" aria-label="Close archive"></button>
-
-  <script id="site-data" type="application/json"><!-- SITE_DATA --></script>
-  <script src="app.js"></script>
+    <section class="section-block">
+      <h2>things that failed / taught me something</h2>
+      <div class="list-grid">
+        <!-- FAILURE_ITEMS -->
+      </div>
+    </section>
+  </main>
 </body>
 </html>

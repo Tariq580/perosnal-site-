@@ -4,7 +4,7 @@
   "description": "A monochrome personal archive built from Markdown",
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "nodemon --watch content --watch scripts --watch index.template.html --watch app.js --watch styles.css --ext md,js,html,css --exec 'npm run build'",
+    "dev": "nodemon --watch content --watch scripts --watch index.template.html --watch entry.template.html --watch styles.css --ext md,js,html,css --exec 'npm run build'",
     "new": "node scripts/new-article.js"
   },
   "dependencies": {

@@ -5,6 +5,7 @@ status: live
 sort_date: 2026-03-05
 date_label: Live
 summary: The site you are reading now. A personal archive for essays, notes, and project logs.
+project_url: https://example.com/personal-site
 tags:
   - project
   - design

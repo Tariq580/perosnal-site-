@@ -5,6 +5,7 @@ status: shipped
 sort_date: 2025-11-01
 date_label: Shipped
 summary: A note-taking approach built around plain text files, simple editors, and long-term portability.
+project_url: https://example.com/plain-text-notes
 tags:
   - project
   - notes

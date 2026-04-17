@@ -5,6 +5,7 @@ status: shipped
 sort_date: 2025-09-12
 date_label: Shipped
 summary: A tiny tool for exporting browser bookmarks into plain text with less clutter and no account setup.
+project_url: https://example.com/bookmark-exporter
 tags:
   - project
   - browser

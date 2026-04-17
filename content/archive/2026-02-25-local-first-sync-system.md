@@ -5,6 +5,7 @@ status: exploring
 sort_date: 2026-02-25
 date_label: Exploring
 summary: An idea for syncing plain text files across devices without needing a traditional cloud account.
+project_url: https://example.com/local-first-sync
 tags:
   - project
   - idea

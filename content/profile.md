@@ -1,11 +1,12 @@
 ---
 name: Arian
-site_title: Arian Archive
-tagline: Notes, projects, essays, and open loops.
+site_title: Arian
+tagline: projects, essays, notes, and open loops.
 location: Japan
+avatar: assets/avatar-placeholder.svg
 intro:
-  - I'm interested in tools, ambition, internet culture, and the process of learning in public.
-  - This archive is where I keep longer essays, shorter notes, project logs, and the experiments that taught me something.
+  - curious guy creating things, writing notes, and trying to build a life that feels intentional.
+  - living in japan. learning in public. using this site as a home for projects, essays, and quick thoughts.
 contact:
   - label: X
     value: "@TechWithArian"
@@ -36,6 +37,6 @@ shelf:
     - "Ambient 1: Music for Airports"
 ---
 
-I wanted this site to feel less like a gimmick and more like a personal archive: a place where essays, quick thoughts, project logs, and unfinished questions can live side by side.
+This site is a simple home for what I am building, what I am thinking about, and what I have learned from trying things early.
 
-Everything here is written in Markdown, published as static files, and organized so people can move through it like a reading room instead of a maze of pages.
+Everything is written in Markdown and published as static files so I can keep it lightweight and easy to update.
