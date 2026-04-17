@@ -3,7 +3,7 @@ name: Arian
 site_title: Arian
 tagline: projects, essays, notes, and open loops.
 location: Japan
-avatar: assets/avatar-placeholder.svg
+avatar: assets/mypic.jpg
 intro:
   - curious guy creating things, writing notes, and trying to build a life that feels intentional.
   - living in japan. learning in public. using this site as a home for projects, essays, and quick thoughts.
