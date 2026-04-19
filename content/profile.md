@@ -1,6 +1,6 @@
 ---
-name: Arian
-site_title: hey, its me Arian
+name: hey, its me Arian
+site_title: tariq Arian
 tagline: projects, essays, notes, and open loops.
 avatar: assets/mypic.jpg
 intro:
