@@ -38,6 +38,7 @@ updates/
 Edit `content/profile.md` to change:
 
 - name
+- site title
 - tagline
 - avatar path
 - location
@@ -52,6 +53,10 @@ To replace the profile picture, either:
 ## Archive Entries
 
 Every entry is a Markdown file in `content/archive/`.
+
+There is also a copyable starter file here:
+
+- `content/ENTRY_TEMPLATE.md`
 
 Example:
 
@@ -82,9 +87,25 @@ Optional project fields:
 ```md
 status: live
 project_url: https://example.com/my-project
+show_in_built: true
+show_in_failed: false
 ```
 
 `project_url` is shown on the generated project page as a link you can replace later with the real one.
+
+Homepage category rules:
+
+- `type: project` + `show_in_built: true` => `things i'm working on // things i've built`
+- `type: project` + `show_in_failed: true` => `things that failed / taught me something`
+- `type: essay` => `articles i've written`
+- `type: note` or `type: update` => `notes / thoughts / now`
+
+If you want one project in both homepage sections, use:
+
+```md
+show_in_built: true
+show_in_failed: true
+```
 
 ## Commands
 

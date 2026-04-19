@@ -34,12 +34,14 @@ if (fs.existsSync(filePath)) {
   process.exit(1);
 }
 
-const statusLine = type === 'project' ? 'status: exploring\n' : '';
+const projectFields = type === 'project'
+  ? 'status: exploring\nshow_in_built: true\nshow_in_failed: false\nproject_url: "https://example.com/your-project"\n'
+  : '';
 
 const template = `---
 title: ${title}
 type: ${type}
-${statusLine}sort_date: ${dateStr}
+${projectFields}sort_date: ${dateStr}
 date_label: ${dateLabel}
 summary: One sentence on what this entry is about.
 tags:

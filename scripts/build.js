@@ -90,10 +90,7 @@ function readProfile() {
     location: parsed.data.location || '',
     avatar: parsed.data.avatar || 'assets/avatar-placeholder.svg',
     intro: parsed.data.intro || [],
-    contact: parsed.data.contact || [],
-    currentFocus: parsed.data.current_focus || [],
-    readingNow: parsed.data.reading_now || [],
-    bodyHtml: marked.parse(parsed.content.trim())
+    contact: parsed.data.contact || []
   };
 }
 
@@ -111,6 +108,8 @@ function readEntries() {
         title: parsed.data.title || slug,
         type,
         status: parsed.data.status || '',
+        showInBuilt: parsed.data.show_in_built,
+        showInFailed: parsed.data.show_in_failed,
         sortDate: parsed.data.sort_date || parsed.data.date || '',
         dateLabel: parsed.data.date_label || parsed.data.date || '',
         summary: parsed.data.summary || '',
@@ -122,6 +121,18 @@ function readEntries() {
       };
     })
     .sort((a, b) => new Date(b.sortDate) - new Date(a.sortDate));
+}
+
+function shouldShowInBuilt(entry) {
+  if (entry.type !== 'project') return false;
+  if (typeof entry.showInBuilt === 'boolean') return entry.showInBuilt;
+  return entry.status !== 'failed';
+}
+
+function shouldShowInFailed(entry) {
+  if (entry.type !== 'project') return false;
+  if (typeof entry.showInFailed === 'boolean') return entry.showInFailed;
+  return entry.status === 'failed';
 }
 
 function renderSocialLinks(profile) {
@@ -151,8 +162,8 @@ function renderIntro(profile) {
 
 function renderHome(profile, entries) {
   const projects = entries.filter((entry) => entry.type === 'project');
-  const activeProjects = projects.filter((entry) => entry.status !== 'failed');
-  const failedProjects = projects.filter((entry) => entry.status === 'failed');
+  const activeProjects = projects.filter(shouldShowInBuilt);
+  const failedProjects = projects.filter(shouldShowInFailed);
   const essays = entries.filter((entry) => entry.type === 'essay');
   const notesAndUpdates = entries.filter((entry) => entry.type === 'note' || entry.type === 'update');
   const inlineStyles = fs.readFileSync(STYLE_FILE, 'utf8');
