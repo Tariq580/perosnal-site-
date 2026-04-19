@@ -15,4 +15,5 @@ Dropshipping was my first business.
 
 I bought a course, spent the $200 I had in savings on Shopify, a domain, and ads, and found out very quickly that the internet makes this stuff look much easier than it really is.
 
-It failed, but it pushed me into a world of tools, experiments, and ideas I probably would not have touched otherwise.
+
+
