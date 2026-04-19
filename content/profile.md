@@ -5,8 +5,8 @@ tagline: projects, essays, notes, and open loops.
 location: Japan
 avatar: assets/mypic.jpg
 intro:
-  - curious guy creating things, writing notes, and trying to build a life that feels intentional.
-  - living in japan. learning in public. using this site as a home for projects, essays, and quick thoughts.
+  - I write about design, tools, process, ambition, and the things I learn by trying.
+  - living in Japan. building in public. using this site as a home for projects, essays, and quick thoughts.
 contact:
   - label: X
     value: "@TechWithArian"
@@ -15,9 +15,9 @@ contact:
     value: Tariq580
     url: https://github.com/Tariq580
 current_focus:
-  - Redesigning this site into a calmer reading experience.
-  - Learning programming seriously while still shipping small things.
-  - Writing more often, even when the thought is still unfinished.
+  - this site
+  - writing more
+  - personal projects
 reading_now:
   - 48 Laws of Power
   - How to Stop Overthinking
@@ -37,6 +37,6 @@ shelf:
     - "Ambient 1: Music for Airports"
 ---
 
-This site is a simple home for what I am building, what I am thinking about, and what I have learned from trying things early.
+This site is where I work through ideas in public. Some posts are finished. Some are rough notes. All of them are part of the process.
 
-Everything is written in Markdown and published as static files so I can keep it lightweight and easy to update.
+Everything is written in Markdown and published as static files so it stays lightweight, easy to update, and easy to move.

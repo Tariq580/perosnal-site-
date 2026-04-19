@@ -4,7 +4,7 @@ type: project
 status: paused
 sort_date: 2026-02-16
 date_label: Paused
-summary: A web app idea that reminded me a simple text file often does the job better.
+summary: Started as a web app idea, then reminded me that a simple text file already did most of what I needed.
 project_url: https://example.com/reading-tracker
 tags:
   - project

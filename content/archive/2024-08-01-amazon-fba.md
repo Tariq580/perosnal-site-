@@ -4,15 +4,17 @@ type: project
 status: failed
 sort_date: 2024-08-01
 date_label: Failed
-summary: A first serious business attempt that cost money, confidence, and a few assumptions about how easy ecommerce would be.
+summary: I borrowed $2k from my dad, tried to build a brand through Amazon FBA, and learned how expensive being wrong can be.
 tags:
   - project
   - failure
   - ecommerce
 ---
 
-I treated Amazon FBA like a shortcut into business.
+I treated Amazon FBA like my first serious business attempt.
 
-It turned out to be more expensive, more uncertain, and less forgiving than the internet made it seem. I picked a product, got inventory into warehouses, and waited for traction that never really came.
+I borrowed $2k from my dad, found a supplier on Alibaba, chose water bottles, and tried to sell them in the US through Amazon.
 
-Losing money hurt, especially because I borrowed from my dad. But the experience changed the way I think about risk, hype, and what it means to understand a market before committing to it.
+I got one sale, then nothing. In the end I had to pay Amazon to throw the inventory away just to stop the extra costs.
+
+Losing that money hurt, but it changed the way I think about hype, risk, and understanding a market before going all in.

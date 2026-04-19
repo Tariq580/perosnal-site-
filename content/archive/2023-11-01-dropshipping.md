@@ -4,15 +4,15 @@ type: project
 status: failed
 sort_date: 2023-11-01
 date_label: Failed
-summary: My first online business attempt, powered by internet promises and stopped by reality.
+summary: My first online business attempt. I lost the $200 I had in my savings and learned that internet business videos make everything look easier than it is.
 tags:
   - project
   - failure
   - learning
 ---
 
-Dropshipping was the first business model that made me feel like success might be one decision away.
+Dropshipping was my first business.
 
-I paid for a course, spent the rest of my savings on the store and ads, and discovered that simple business models become difficult the second real money and real uncertainty are involved.
+I bought a course, spent the $200 I had in savings on Shopify, a domain, and ads, and found out very quickly that the internet makes this stuff look much easier than it really is.
 
-It failed, but it pushed me into a world of tools, ideas, and experiments I might never have touched otherwise.
+It failed, but it pushed me into a world of tools, experiments, and ideas I probably would not have touched otherwise.
