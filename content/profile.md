@@ -5,8 +5,7 @@ tagline: projects, essays, notes, and open loops.
 location: Japan
 avatar: assets/mypic.jpg
 intro:
-  - I write about design, tools, process, ambition, and the things I learn by trying.
-  - living in Japan. building in public. using this site as a home for projects, essays, and quick thoughts.
+  - hi, this is arian. you can find anything about me here. well, not exactly everythig but projects, notes/thoughts, things i have failed at... 
 contact:
   - label: X
     value: "@tariqarian_x"
