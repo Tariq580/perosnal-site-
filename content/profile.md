@@ -1,8 +1,7 @@
 ---
 name: Arian
-site_title: Arian
+site_title: hey, its me Arian
 tagline: projects, essays, notes, and open loops.
-location: Japan
 avatar: assets/mypic.jpg
 intro:
   - hi, this is arian. you can find anything about me here. well, not exactly everythig but projects, notes/thoughts, things i have failed at... 
