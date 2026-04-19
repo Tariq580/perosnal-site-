@@ -9,34 +9,32 @@ intro:
   - living in Japan. building in public. using this site as a home for projects, essays, and quick thoughts.
 contact:
   - label: X
-    value: "@TechWithArian"
-    url: https://x.com/TechWithArian
+    value: "@tariqarian_x"
+    url: https://x.com/tariqarian_x
   - label: GitHub
     value: Tariq580
     url: https://github.com/Tariq580
 current_focus:
   - this site
-  - writing more
-  - personal projects
+  - SpeakUP ios app 
+  - reading more books 
 reading_now:
-  - 48 Laws of Power
-  - How to Stop Overthinking
+  - 1984 by George Orwell 
+  - Stop Overthinking by Trenton 
 shelf:
   books:
     - Atomic Habits
     - To Kill a Mockingbird
     - How to Win Friends and Influence People
     - Think and Grow Rich
-  films:
-    - Interstellar
-    - Inception
-    - Titanic
-  music:
-    - Kind of Blue
-    - In Rainbows
-    - "Ambient 1: Music for Airports"
+    - zero to one 
+    - The 5 am club 
+    - ikigai 
+    - feel good productivity 
+    - 48 laws of power 
+    
+
 ---
 
-This site is where I work through ideas in public. Some posts are finished. Some are rough notes. All of them are part of the process.
+this website is like my personal diary where you can find everything about me like things i've build, books i have read, notes/thoughts... '
 
-Everything is written in Markdown and published as static files so it stays lightweight, easy to update, and easy to move.
